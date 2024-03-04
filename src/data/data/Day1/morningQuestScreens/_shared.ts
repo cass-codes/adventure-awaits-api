@@ -1,11 +1,11 @@
-import { SaveChoiceOption } from "../../../../types";
-import { SavingService } from "../../../SavingService/SavingService";
+import { LoadService } from "../../../../server/LoadService";
+import { SaveChoiceOption } from "../../../../shared/types/Screen";
 
 export function evalStats(): Pick<
   SaveChoiceOption,
   "type" | "optionText" | "screenId"
 >[] {
-  const user = SavingService.loadUser();
+  const user = LoadService.loadUser();
   const options: Pick<SaveChoiceOption, "type" | "optionText" | "screenId">[] =
     [];
   if (user.stats.brawn > 0) {

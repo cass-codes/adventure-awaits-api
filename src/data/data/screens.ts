@@ -1,4 +1,4 @@
-import { Screen } from "../../types/Screen";
+import { Screen } from "../../shared/types/Screen";
 import { day0Screens } from "./Day0";
 import { day1Screens } from "./Day1";
 

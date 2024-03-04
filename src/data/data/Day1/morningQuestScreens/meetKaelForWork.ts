@@ -1,4 +1,4 @@
-import { EvaluatedChoiceOption, Screen } from "../../../../types";
+import { EvaluatedChoiceOption, Screen } from "../../../../shared/types/Screen";
 import { evalStats } from "./_shared";
 
 function evalStatsForKael(): EvaluatedChoiceOption[] {

@@ -1,5 +1,5 @@
 import * as _ from "lodash";
-import { Screen } from "../../../../types/Screen";
+import { Screen } from "../../../../shared/types/Screen";
 
 const day1Marketplace: Screen = {
   _id: "day1Marketplace",
@@ -16,7 +16,7 @@ const day1Marketplace: Screen = {
     place to buy instruments.`,
     `As you walk even further you see another booth set up with a sign for Foxtail Academy. A large man with a big
     beard is seated at a table, looking over some papers. The sign on the table says "Sign up for the next class!"`,
-    `There's a lot to do here, and you're feeling a little overwhelmed by the choices.`,
+    "There's a lot to do here, and you're feeling a little overwhelmed by the choices.",
   ],
   choiceInformation: {
     text: "What do you do?",

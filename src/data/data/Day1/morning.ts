@@ -1,7 +1,7 @@
-import { ChoiceOption, Screen } from "../../../types/Screen";
-import { SavingService } from "../../SavingService/SavingService";
-import { QuestStatus } from "../../../types/Quest";
-import { Tavern } from "../../../types/User";
+import { ChoiceOption, Screen } from "../../../shared/types/Screen";
+import { Tavern } from "../../../shared/types/User";
+import { QuestStatus } from "../../../shared/types/Quest";
+import { LoadService } from "../../../server/LoadService";
 
 // TODO: check all of these screens to make sure they have the right header.
 // TODO: finish the evalWhichTavern fn and the respective screens
@@ -22,7 +22,7 @@ const endFirstDay: Screen = {
         type: "screen",
         optionText: "Continue to Day 1 (in development)",
         screenId: (): string => {
-          const user = SavingService.loadUser();
+          const user = LoadService.loadUser();
           switch (user.tavern) {
             case Tavern.TheRustySword:
               return wakeUp_RustySword._id;
@@ -94,7 +94,7 @@ const wakeUp_SilverSpoon: Screen = {
 };
 
 function evalStartFirstDay() {
-  const user = SavingService.loadUser();
+  const user = LoadService.loadUser();
   const quests = user.quests;
   const options = [
     {
@@ -134,19 +134,19 @@ const sitAndChat: Screen = {
     `You sit at the bar and chat with the barkeep. He tells you about the latest news and gossip
     in the city.`,
     (): string => {
-      const user = SavingService.loadUser();
+      const user = LoadService.loadUser();
       return user.quests.learnAboutRobberies.status === QuestStatus.notFound
         ? `You learn that the city has had some recent economic troubles and many believe that they
       are due to a series of robberies that have targeted the city's wealthiest citizens.`
         : "";
     },
-    `You eat a hearty breakfast and drink a cup of coffee. You feel ready to take on the day.`,
+    "You eat a hearty breakfast and drink a cup of coffee. You feel ready to take on the day.",
   ],
   choiceInformation: {
     text: "",
     options: [
       (): ChoiceOption => {
-        const user = SavingService.loadUser();
+        const user = LoadService.loadUser();
         return user.quests.learnAboutRobberies.status === QuestStatus.notFound
           ? {
               type: "save",

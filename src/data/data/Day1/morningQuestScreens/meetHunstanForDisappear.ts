@@ -1,4 +1,4 @@
-import { Screen } from "../../../../types";
+import { Screen } from "../../../../shared/types/Screen";
 
 const meetHunstanForDisappear: Screen = {
   _id: "meetHunstanForDisappear",

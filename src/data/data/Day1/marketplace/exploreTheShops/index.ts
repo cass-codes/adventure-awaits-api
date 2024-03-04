@@ -1,4 +1,4 @@
-import { Screen } from "../../../../../types/Screen";
+import { Screen } from "../../../../../shared/types/Screen";
 import { screens as blacksmithScreens } from "./visitTheBlacksmith";
 
 const exploreTheShops: Screen = {

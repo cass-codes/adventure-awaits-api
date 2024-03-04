@@ -1,4 +1,4 @@
-import { Quest, QuestStatus } from "../../../types/Quest";
+import { Quest, QuestStatus } from "../../../shared/types/Quest";
 
 const meetBeardedKnightForWork: Quest = {
   name: "meetBeardedKnightForWork",

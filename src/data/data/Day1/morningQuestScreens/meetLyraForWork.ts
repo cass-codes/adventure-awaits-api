@@ -1,6 +1,11 @@
-import { EvaluatedChoiceOption, PictureMain, Screen } from "../../../../types";
-import { SavingService } from "../../../SavingService/SavingService";
+import {
+  EvaluatedChoiceOption,
+  PictureMain,
+  Screen,
+} from "../../../../shared/types/Screen";
+import { SavingService } from "../../../../server/SavingService";
 import { evalStats } from "./_shared";
+import { LoadService } from "../../../../server/LoadService";
 
 function evalStatsForLyraAndHunstan(): EvaluatedChoiceOption[] {
   const options = evalStats();
@@ -40,7 +45,7 @@ const meetLyraForWork: Screen = {
     `You look at the man next to her and shake his hand. He grunts at you and
     Lyra laughs.`,
     (): PictureMain => {
-      const user = SavingService.loadUser();
+      const user = LoadService.loadUser();
       return user.relationships.Hunstan && user.relationships.Hunstan > 0
         ? {
             url: "Hunstan.png",

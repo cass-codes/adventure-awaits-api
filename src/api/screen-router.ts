@@ -1,9 +1,10 @@
 import { Router } from "express";
+import { getScreenById, getScreensByParentId } from "./screen-controller";
 
 const screenRouter = Router();
 
-screenRouter.get("/", (req, res) => {
-  res.send("Welcome to the screen router");
-});
+screenRouter.get("/:id/nextScreens", getScreensByParentId);
+
+screenRouter.get("/:id", getScreenById);
 
 export { screenRouter };

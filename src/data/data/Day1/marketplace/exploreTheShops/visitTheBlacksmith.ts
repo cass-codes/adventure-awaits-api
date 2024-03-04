@@ -1,11 +1,11 @@
-import { ChoiceOption, Screen } from "../../../../../types/Screen";
-import { SavingService } from "../../../../SavingService/SavingService";
+import { ChoiceOption, Screen } from "../../../../../shared/types/Screen";
+import { LoadService } from "../../../../../server/LoadService";
 
 const visitTheBlacksmith: Screen = {
   _id: "visitTheBlacksmith",
   header: "The Blacksmith",
   main: [
-    `You decide to visit the blacksmith. The sound of metal on metal is even louder inside.`,
+    "You decide to visit the blacksmith. The sound of metal on metal is even louder inside.",
     `A large woman with a thick apron and soot on her face looks up from her work and nods at you.`,
     `"Let me know if I can do anything for you, hun," she says in a surprisingly high voice.`,
     `You thank her and start examining the weapons and armor, noticing the wear and prices as you look.`,
@@ -83,7 +83,7 @@ const buyTheShield: Screen = {
         saveValues: [{ savePath: "User.coins", saveValue: "-2" }], // TODO: Once inventory is added, add shield to the inventory
       },
       (): ChoiceOption => {
-        const user = SavingService.loadUser();
+        const user = LoadService.loadUser();
         if (user.stats.charm < 2) {
           return {
             type: "save",
@@ -197,7 +197,7 @@ const buyTheArmor: Screen = {
         saveValues: [{ savePath: "User.coins", saveValue: "-15" }], // TODO: Once inventory is added, add armor to the inventory
       },
       (): ChoiceOption => {
-        const user = SavingService.loadUser();
+        const user = LoadService.loadUser();
         if (user.stats.charm < 3) {
           return {
             type: "save",
@@ -366,7 +366,7 @@ const buyTheSword: Screen = {
         saveValues: [{ savePath: "User.coins", saveValue: "-5" }], // TODO: Once inventory is added, add sword to the inventory
       },
       (): ChoiceOption => {
-        const user = SavingService.loadUser();
+        const user = LoadService.loadUser();
         if (user.stats.charm < 3) {
           return {
             type: "save",

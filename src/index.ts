@@ -4,10 +4,14 @@ import { apiRouter } from "./api";
 
 dotenv.config();
 
+var cors = require("cors");
+
 const app: Express = express();
 const port = process.env.PORT || 3090;
 
 app.use(express.json());
+
+app.use(cors());
 
 app.use("/api", apiRouter);
 
