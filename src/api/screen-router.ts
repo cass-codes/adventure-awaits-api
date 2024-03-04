@@ -1,9 +1,7 @@
 import { Router } from "express";
-import { getScreenById, getScreensByParentId } from "./screen-controller";
+import { getScreenById } from "./screen-controller";
 
 const screenRouter = Router();
-
-screenRouter.get("/:id/nextScreens", getScreensByParentId);
 
 screenRouter.get("/:id", getScreenById);
 
