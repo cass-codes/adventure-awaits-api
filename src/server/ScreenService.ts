@@ -14,30 +14,33 @@ export class ScreenService {
     return screen;
   }
 
-  static getScreenIdsByParentId(parentId: string): string[] {
-    const parentScreen = ScreenService.getScreenById(parentId);
-    const options =
-      parentScreen.choiceInformation.options instanceof Function
-        ? parentScreen.choiceInformation.options()
-        : parentScreen.choiceInformation.options;
+  static getScreensByIds(ids: string[]): Screen[] {
+    return ids.map((id) => ScreenService.getScreenById(id));
+  }
 
-    const ids: string[] = [];
-
-    options.forEach((_option: ChoiceOption[] | Function) => {
+  static evaluateScreen(_screen: Screen): Screen {
+    const screen = { ..._screen };
+    const main = screen.main.map((_line) => {
+      return _line instanceof Function ? _line() : _line;
+    });
+    const _options =
+      screen.choiceInformation.options instanceof Function
+        ? screen.choiceInformation.options()
+        : screen.choiceInformation.options;
+    const options = _options.map((_option: ChoiceOption) => {
       const option: EvaluatedChoiceOption =
-        typeof _option === "function" ? _option() : _option;
-
+        _option instanceof Function ? _option() : _option;
       const screenId =
         option.screenId instanceof Function
           ? option.screenId()
           : option.screenId;
-      ids.push(screenId);
+      return { ...option, screenId };
     });
 
-    return ids;
-  }
-
-  static getScreensByIds(ids: string[]): Screen[] {
-    return ids.map((id) => ScreenService.getScreenById(id));
+    return {
+      ...screen,
+      main,
+      choiceInformation: { ...screen.choiceInformation, options },
+    };
   }
 }

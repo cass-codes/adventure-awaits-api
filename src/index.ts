@@ -1,6 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import { apiRouter } from "./api";
+import { log } from "./api/middleware";
 
 dotenv.config();
 
@@ -12,6 +13,8 @@ const port = process.env.PORT || 3090;
 app.use(express.json());
 
 app.use(cors());
+
+app.use(log);
 
 app.use("/api", apiRouter);
 
