@@ -204,7 +204,7 @@ const callItANight: Screen = {
         type: "save",
         optionText: "Next",
         screenId: "endFirstDay",
-        saveValues: [{ savePath: "User.tavern", saveValue: "TheRustySword" }],
+        saveValues: [{ savePath: "User.tavern", saveValue: "The Rusty Sword" }],
       },
     ],
   },
@@ -351,7 +351,7 @@ const thankTheKnight_callItANight: Screen = {
         screenId: "endFirstDay",
         saveValues: [
           { savePath: "User.relationships.Kael", saveValue: "++" },
-          { savePath: "User.tavern", saveValue: "TheRustySword" },
+          { savePath: "User.tavern", saveValue: "The Rusty Sword" },
         ],
       },
     ],
@@ -992,7 +992,7 @@ const thankTheBard_callItANight: Screen = {
         screenId: "endFirstDay",
         saveValues: [
           { savePath: "User.relationships.Serena", saveValue: "++" },
-          { savePath: "User.tavern", saveValue: "TheRustySword" },
+          { savePath: "User.tavern", saveValue: "The Rusty Sword" },
         ],
       },
     ],

@@ -50,8 +50,10 @@ export interface User {
     magic: number;
     charm: number;
   };
-  coins: number;
-  pennies: number;
+  money: {
+    gold: number;
+    pennies: number;
+  };
   motivations?: Motivations[];
   relationships: {
     Lyra?: number;

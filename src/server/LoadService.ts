@@ -1,7 +1,7 @@
-import { user } from "./user";
+import { getUser } from "./user";
 
 export class LoadService {
   static loadUser() {
-    return user;
+    return getUser();
   }
 }
