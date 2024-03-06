@@ -1,5 +1,5 @@
 import { Quest, QuestStatus } from "../shared/types/Quest";
-import { Relationship, Stat, UserClass } from "../shared/types/User";
+import { Relationship, Stat, User, UserClass } from "../shared/types/User";
 import { dayZeroQuests } from "../data/data/Day0/quests";
 import { parseSavePath } from "./helper";
 import {
@@ -15,8 +15,26 @@ import {
   setTavern,
   getUser,
 } from "./user";
+import { GameRepository } from "../data-access/game-repository";
 
 export class SavingService {
+  constructor(private gameRepository: GameRepository) {}
+
+  async saveGame(gameId: string, screenId: string) {
+    const user = getUser();
+    if (gameId) {
+      const currentGame = await this.gameRepository.getGame(gameId);
+      console.log("currentGame", currentGame);
+      console.log("gameId", gameId);
+      if (currentGame) {
+        await this.gameRepository.updateGame(gameId, user, screenId);
+        return gameId;
+      }
+    }
+    const game = await this.gameRepository.insertGame(user, screenId);
+    return game._id;
+  }
+
   static saveContent(input: string, savePath: string) {
     const { ObjectName, propertyPath } = parseSavePath(savePath);
     if (ObjectName === "User") {
@@ -45,12 +63,6 @@ export class SavingService {
       throw Error(`Object not found ${ObjectName}`);
     }
     return getUser();
-  }
-
-  static saveGame(gameId: string, screenId: string) {
-    const user = getUser();
-    localStorage.setItem("user", JSON.stringify(user));
-    localStorage.setItem("screenId", screenId);
   }
 
   static loadGame(): { screenId: string } {
