@@ -1,5 +1,5 @@
 import { ChoiceOption, Screen } from "../../../shared/types/Screen";
-import { Tavern } from "../../../shared/types/User";
+import { Tavern } from "../../../shared/types/Character";
 import { QuestStatus } from "../../../shared/types/Quest";
 import { LoadService } from "../../../server/LoadService";
 
@@ -114,6 +114,7 @@ function evalStartFirstDay() {
   });
   return options;
 }
+
 const headOut: Screen = {
   _id: "headOut",
   header: "Belenham",
