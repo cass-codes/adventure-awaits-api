@@ -1,33 +1,42 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express } from "express";
 import dotenv from "dotenv";
 import { apiRouter } from "./api";
-import { log } from "./api/middleware";
+import helmet from "helmet";
 import { connectToDb, disconnectFromDb } from "./data-access";
+import { log } from "./api/middleware";
 
 dotenv.config();
 
 var cors = require("cors");
 
+const app: Express = express();
+const port = process.env.PORT || 3090;
+
+// Express settings
+app.disable("x-powered-by");
+
+// Express middleware
+const limit = "5mb";
+app.use(express.json({ limit }));
+app.use(express.urlencoded({ limit, extended: true }));
+
+app.use(cors());
+
+// Package middleware
+app.use(helmet());
+app.use(log);
+
+app.use("/api", apiRouter);
+
 async function start() {
   const uri = process.env.MONGO_URI || "";
   await connectToDb(uri);
-
-  const app: Express = express();
-  const port = process.env.PORT || 3090;
-
-  app.use(express.json());
-
-  app.use(cors());
-
-  app.use(log);
-
-  app.use("/api", apiRouter);
-
   app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
   });
 }
 
 start().catch((e) => {
-  disconnectFromDb();
+  console.error(e);
+  disconnectFromDb().then(() => process.exit(1));
 });
