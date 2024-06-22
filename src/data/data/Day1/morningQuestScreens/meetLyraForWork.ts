@@ -46,7 +46,8 @@ const meetLyraForWork: Screen = {
     Lyra laughs.`,
     (): PictureMain => {
       const user = LoadService.loadUser();
-      return user.relationships.Hunstan && user.relationships.Hunstan > 0
+      return user.relationships.Hunstan &&
+        user.relationships.Hunstan.relationshipValue > 0
         ? {
             url: "Hunstan.png",
             alt: "Hunstan",
