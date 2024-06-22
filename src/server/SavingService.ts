@@ -1,5 +1,5 @@
 import { Quest, QuestStatus } from "../shared/types/Quest";
-import { Relationship, Stat, User, UserClass } from "../shared/types/User";
+import { Character, UserClass } from "../shared/types/Character";
 import { dayZeroQuests } from "../data/data/Day0/quests";
 import { parseSavePath } from "./helper";
 import {
@@ -16,6 +16,7 @@ import {
   getUser,
 } from "./user";
 import { GameRepository } from "../data-access/game-repository";
+import { Game } from "../shared/types/Game";
 
 export class SavingService {
   constructor(private gameRepository: GameRepository) {}
@@ -23,19 +24,22 @@ export class SavingService {
   async saveGame(gameId: string, screenId: string) {
     const user = getUser();
     if (gameId) {
-      const currentGame = await this.gameRepository.getGame(gameId);
-      console.log("currentGame", currentGame);
-      console.log("gameId", gameId);
+      const currentGame = await GameRepository.getGame(gameId);
       if (currentGame) {
-        await this.gameRepository.updateGame(gameId, user, screenId);
-        return gameId;
+        // await this.gameRepository.updateGame(gameId, user, screenId);
+        // return gameId;
       }
     }
-    const game = await this.gameRepository.insertGame(user, screenId);
-    return game._id;
+    // const game = await this.gameRepository.insertGame(user, screenId);
+    // return game._id;
+    return gameId;
   }
 
-  static saveContent(input: string, savePath: string) {
+  async updateGame(gameId: string, user: Character, screenId: string) {
+    await this.gameRepository.updateGame(gameId, user, screenId);
+  }
+
+  static saveContent(input: string, savePath: string): Character {
     const { ObjectName, propertyPath } = parseSavePath(savePath);
     if (ObjectName === "User") {
       if (propertyPath[0] === "name") {
@@ -65,17 +69,14 @@ export class SavingService {
     return getUser();
   }
 
-  static loadGame(): { screenId: string } {
-    const localUser = localStorage.getItem("user");
-    const localScreenId = localStorage.getItem("screenId");
-    if (localUser) {
-      setUser(JSON.parse(localUser));
-    }
-    return { screenId: localScreenId || "0" };
+  static async loadGame(gameId: string): Promise<Game> {
+    const game = await GameRepository.getGame(gameId);
+    return game;
   }
 
   static restartGame() {
     setUser({
+      _id: "",
       quests: this.restartQuests(dayZeroQuests),
       money: {
         gold: 10,
@@ -91,6 +92,8 @@ export class SavingService {
       },
       relationships: {},
       skills: [],
+      motivations: [],
+      name: "",
     });
     localStorage.removeItem("user");
     localStorage.removeItem("screenId");

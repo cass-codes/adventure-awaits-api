@@ -1,5 +1,5 @@
 import { Types } from "mongoose";
-import { Relationship, UserClass } from "./User";
+import { RelationshipEnum, UserClass } from "./Character";
 import { Quest } from "./Quest";
 
 interface Stats {
@@ -11,23 +11,13 @@ interface Stats {
   charm: number;
 }
 
+export interface Relationship {
+  dayMet: number;
+  relationshipValue: number;
+}
+
 export interface Game {
   _id: Types.ObjectId;
   screenId: string;
-  characterName: string;
-  class?: UserClass;
-  stats: Stats;
-  money: {
-    gold: number;
-    pennies: number;
-  };
-  relationships: {
-    Lyra?: number;
-    Hunstan?: number;
-    Kael?: number;
-    Somerild?: number;
-    Serena?: number;
-    Kiirion?: number;
-  };
-  quests: { [key: string]: Quest };
+  characterId: string;
 }

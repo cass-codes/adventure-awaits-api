@@ -3,15 +3,16 @@ import { dayZeroQuests } from "../data/data/Day0";
 import { Quest, QuestStatus } from "../shared/types/Quest";
 import {
   Motivations,
-  Relationship,
+  RelationshipEnum,
   Stat,
   Tavern,
-  User,
   UserClass,
-} from "../shared/types/User";
+} from "../shared/types/Character";
 import { evalPlusMinusInput } from "./helper";
+import { Relationship } from "../shared/types/Game";
 
-class Character implements User {
+class Character implements Character {
+  _id: string = "";
   quests: { [key: string]: Quest } = {};
   motivations: Motivations[] = [];
   name = "";
@@ -27,16 +28,16 @@ class Character implements User {
     charm: 0,
   };
   relationships: {
-    Lyra?: number;
-    Hunstan?: number;
-    Kael?: number;
-    Somerild?: number;
-    Serena?: number;
-    Kiirion?: number;
+    Lyra?: Relationship;
+    Hunstan?: Relationship;
+    Kael?: Relationship;
+    Somerild?: Relationship;
+    Serena?: Relationship;
+    Kiirion?: Relationship;
   } = {};
   skills: string[] = [];
 
-  constructor(user?: User) {
+  constructor(user?: Character) {
     if (user) {
       Object.assign(this, cloneDeep(user));
     }
@@ -45,11 +46,11 @@ class Character implements User {
 
 let user = new Character();
 
-export function getUser() {
+export function getUser(): Character {
   return user;
 }
 
-export function setUser(newUser: User) {
+export function setUser(newUser: Character) {
   user = new Character(newUser);
 }
 
@@ -91,12 +92,12 @@ export function updateMotivations(value: string) {
 }
 
 export function updateRelationship(value: string, _relationship: string) {
-  const relationship = Relationship[_relationship as Relationship];
+  const relationship = RelationshipEnum[_relationship as RelationshipEnum];
   let rel = user.relationships[relationship];
   if (rel === undefined) {
-    rel = 0;
+    rel = { dayMet: 0, relationshipValue: 0 }; // TODO: dayMet should be set to the current day
   }
-  rel += evalPlusMinusInput(value);
+  rel.relationshipValue += evalPlusMinusInput(value);
   user.relationships[relationship] = rel;
 }
 

@@ -1,3 +1,4 @@
+import { Relationship } from "./Game";
 import { Quest } from "./Quest";
 
 export enum Tavern {
@@ -21,7 +22,7 @@ export enum Motivations {
   adventure = "adventure",
 }
 
-export enum Relationship {
+export enum RelationshipEnum {
   Lyra = "Lyra",
   Hunstan = "Hunstan",
   Kael = "Kael",
@@ -39,7 +40,8 @@ export enum Stat {
   charm = "charm",
 }
 
-export interface User {
+export interface Character {
+  _id: string;
   name?: string;
   class?: UserClass;
   stats: {
@@ -56,12 +58,12 @@ export interface User {
   };
   motivations?: Motivations[];
   relationships: {
-    Lyra?: number;
-    Hunstan?: number;
-    Kael?: number;
-    Somerild?: number;
-    Serena?: number;
-    Kiirion?: number;
+    Lyra?: Relationship;
+    Hunstan?: Relationship;
+    Kael?: Relationship;
+    Somerild?: Relationship;
+    Serena?: Relationship;
+    Kiirion?: Relationship;
   };
   quests: { [key: string]: Quest };
   skills: string[];
