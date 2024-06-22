@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { getUser } from "../server/user";
+import { LoadService } from "../server/LoadService";
 
 const userRouter = Router();
 
-userRouter.get("/", (req, res, next) => {
-  const user = getUser();
-  res.json(user);
+userRouter.get("/:gameId", async (req, res, next) => {
+  const game = await LoadService.getGame(req.params.gameId);
+  res.json(game);
 });
 
 export { userRouter };
