@@ -26,6 +26,7 @@ const theAdventureBegins: Screen = {
           { savePath: "User.stats.goodness", saveValue: "++" },
           { savePath: "User.coins", saveValue: "--" },
           { savePath: "User.coins", saveValue: "--" },
+          { savePath: "User.tavern", saveValue: "The Rusty Sword" },
         ],
       },
       {
@@ -37,6 +38,7 @@ const theAdventureBegins: Screen = {
           { savePath: "User.coins", saveValue: "--" },
           { savePath: "User.coins", saveValue: "--" },
           { savePath: "User.coins", saveValue: "--" },
+          { savePath: "User.tavern", saveValue: "The Silver Spoon" },
         ],
       },
       {
@@ -46,6 +48,7 @@ const theAdventureBegins: Screen = {
         saveValues: [
           { savePath: "User.stats.sneakiness", saveValue: "++" },
           { savePath: "User.coins", saveValue: "--" },
+          { savePath: "User.tavern", saveValue: "Sewer Water" },
         ],
       },
     ],
@@ -201,10 +204,9 @@ const callItANight: Screen = {
     text: "",
     options: [
       {
-        type: "save",
+        type: "screen",
         optionText: "Next",
         screenId: "endFirstDay",
-        saveValues: [{ savePath: "User.tavern", saveValue: "The Rusty Sword" }],
       },
     ],
   },
@@ -349,10 +351,7 @@ const thankTheKnight_callItANight: Screen = {
         type: "save",
         optionText: "Next",
         screenId: "endFirstDay",
-        saveValues: [
-          { savePath: "User.relationships.Kael", saveValue: "++" },
-          { savePath: "User.tavern", saveValue: "The Rusty Sword" },
-        ],
+        saveValues: [{ savePath: "User.relationships.Kael", saveValue: "++" }],
       },
     ],
   },
@@ -992,7 +991,6 @@ const thankTheBard_callItANight: Screen = {
         screenId: "endFirstDay",
         saveValues: [
           { savePath: "User.relationships.Serena", saveValue: "++" },
-          { savePath: "User.tavern", saveValue: "The Rusty Sword" },
         ],
       },
     ],
@@ -1009,10 +1007,9 @@ const callItANight_SS: Screen = {
     text: "",
     options: [
       {
-        type: "save",
+        type: "screen",
         optionText: "Next",
         screenId: "endFirstDay",
-        saveValues: [{ savePath: "User.tavern", saveValue: "TheSilverSpoon" }],
       },
     ],
   },
@@ -1195,10 +1192,7 @@ const thankTheDruid_callItANight: Screen = {
         type: "save",
         optionText: "Next",
         screenId: "endFirstDay",
-        saveValues: [
-          { savePath: "User.relationships.Lyra", saveValue: "++" },
-          { savePath: "User.tavern", saveValue: "TheSilverSpoon" },
-        ],
+        saveValues: [{ savePath: "User.relationships.Lyra", saveValue: "++" }],
       },
     ],
   },
@@ -1293,10 +1287,9 @@ const callItANight_SW: Screen = {
     text: "",
     options: [
       {
-        type: "save",
+        type: "screen",
         optionText: "Next",
         screenId: "endFirstDay",
-        saveValues: [{ savePath: "User.tavern", saveValue: "SewerWater" }],
       },
     ],
   },
@@ -1633,7 +1626,6 @@ const thankTheMan_callItANight: Screen = {
         screenId: "endFirstDay",
         saveValues: [
           { savePath: "User.relationships.Hunstan", saveValue: "++" },
-          { savePath: "User.tavern", saveValue: "SewerWater" },
         ],
       },
     ],
@@ -1661,6 +1653,7 @@ const findDifferentInn: Screen = {
           { savePath: "User.stats.goodness", saveValue: "++" },
           { savePath: "User.coins", saveValue: "--" },
           { savePath: "User.coins", saveValue: "--" },
+          { savePath: "User.tavern", saveValue: "The Rusty Sword" },
         ],
       },
       {
@@ -1672,6 +1665,7 @@ const findDifferentInn: Screen = {
           { savePath: "User.coins", saveValue: "--" },
           { savePath: "User.coins", saveValue: "--" },
           { savePath: "User.coins", saveValue: "--" },
+          { savePath: "User.tavern", saveValue: "The Silver Spoon" },
         ],
       },
     ],
