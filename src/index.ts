@@ -1,9 +1,9 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
-import { apiRouter } from "./api";
+import { apiRouter } from "./app";
 import helmet from "helmet";
 import { connectToDb, disconnectFromDb } from "./data-access";
-import { log } from "./api/middleware";
+import { log, errorHandler } from "./app/modules/shared/middleware";
 
 dotenv.config();
 
@@ -27,6 +27,8 @@ app.use(helmet());
 app.use(log);
 
 app.use("/api", apiRouter);
+
+app.use(errorHandler);
 
 async function start() {
   const uri = process.env.MONGO_URI || "";

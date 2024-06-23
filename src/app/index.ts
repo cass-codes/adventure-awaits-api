@@ -9,6 +9,6 @@ const apiRouter = Router();
 apiRouter.use("/health", healthRouter);
 apiRouter.use("/screen", screenRouter);
 apiRouter.use("/save", saveRouter);
-apiRouter.use("/game", gameRouter);
+apiRouter.use("/games", gameRouter);
 
 export { apiRouter };
