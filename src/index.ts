@@ -3,8 +3,7 @@ import dotenv from "dotenv";
 import { apiRouter } from "./app";
 import helmet from "helmet";
 import { connectToDb, disconnectFromDb } from "./data-access";
-import { log } from "./app/middleware";
-import { errorHandler } from "./app/modules/shared/middleware/error-handler";
+import { log, errorHandler } from "./app/modules/shared/middleware";
 
 dotenv.config();
 
