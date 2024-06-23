@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { SavingService } from "../server/SavingService";
-import { GameRepository } from "../data-access/game-repository";
+import { GameRepository } from "./modules/games/data-access/game-repository";
 import { Character } from "../shared/types/Character";
 
 const saveRouter = Router();
@@ -8,15 +8,15 @@ const saveRouter = Router();
 const gameRepository = new GameRepository();
 const savingService = new SavingService(gameRepository);
 
-saveRouter.post("/", async (req, res, next) => {
-  const { screenId, gameId } = req.body;
+saveRouter.post("/", async (req, res) => {
+  const { gameId } = req.body;
   console.log("req.body", req.body);
-  const id = await savingService.saveGame(gameId, screenId);
+  const id = await savingService.saveGame(gameId);
   console.log("id", id);
   res.json(id);
 });
 
-saveRouter.post("/:gameId", (req, res, next) => {
+saveRouter.post("/:gameId", (req, res) => {
   const { value, objectPath, screenId } = req.body;
   const { gameId } = req.params;
 
