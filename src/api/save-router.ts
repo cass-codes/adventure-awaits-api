@@ -9,9 +9,9 @@ const gameRepository = new GameRepository();
 const savingService = new SavingService(gameRepository);
 
 saveRouter.post("/", async (req, res) => {
-  const { screenId, gameId } = req.body;
+  const { gameId } = req.body;
   console.log("req.body", req.body);
-  const id = await savingService.saveGame(gameId, screenId);
+  const id = await savingService.saveGame(gameId);
   console.log("id", id);
   res.json(id);
 });
