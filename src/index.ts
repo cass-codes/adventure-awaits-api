@@ -1,9 +1,9 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
-import { apiRouter } from "./api";
+import { apiRouter } from "./app";
 import helmet from "helmet";
 import { connectToDb, disconnectFromDb } from "./data-access";
-import { log } from "./api/middleware";
+import { log } from "./app/middleware";
 
 dotenv.config();
 
