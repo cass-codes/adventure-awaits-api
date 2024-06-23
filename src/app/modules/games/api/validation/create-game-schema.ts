@@ -1,4 +1,5 @@
 import { JSONSchemaType } from "ajv";
+import { UserClass } from "../../../../../shared/types/Character";
 
 export interface CreateGameDto {
   userId?: string;
@@ -6,7 +7,7 @@ export interface CreateGameDto {
   screen: string;
   character: {
     characterName: string;
-    class: string;
+    class: UserClass;
     stats: {
       goodness: number;
       cleverness: number;
@@ -43,7 +44,10 @@ export const createGameSchema: JSONSchemaType<GameSchema> = {
           additionalProperties: false,
           properties: {
             characterName: { type: "string" },
-            class: { type: "string" }, // TODO Add enum
+            class: {
+              type: "string",
+              enum: Object.values(UserClass),
+            },
             stats: {
               type: "object",
               additionalProperties: false,

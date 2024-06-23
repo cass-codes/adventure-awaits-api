@@ -1,3 +1,4 @@
+import { UserClass } from "../../../../../shared/types/Character";
 import { createValidationFromSchema } from "../../../shared/middleware/ajv-validation";
 import { createGameSchema, type CreateGameDto } from "./create-game-schema";
 
@@ -12,7 +13,7 @@ describe("CreateGameSchema", () => {
       screen: "screen",
       character: {
         characterName: "name",
-        class: "class",
+        class: UserClass.bard,
         stats: {
           goodness: 1,
           cleverness: 1,
@@ -112,8 +113,6 @@ describe("CreateGameSchema", () => {
     it.each([
       ["characterName", 1, "string"],
       ["characterName", {}, "string"],
-      ["class", 1, "string"],
-      ["class", {}, "string"],
       ["stats", "string", "object"],
       ["stats", 1, "object"],
       ["money", "string", "object"],
@@ -128,6 +127,32 @@ describe("CreateGameSchema", () => {
 
       expect(validationErrors).toEqual([
         `/body/character/${field} must be ${validType}`,
+      ]);
+    });
+
+    it.each(Object.values(UserClass))(
+      "should succeed with class as %s",
+      (validClass) => {
+        const body = { ...validBody };
+        body.character.class = validClass;
+        const validationErrors = validator({
+          body,
+        });
+
+        expect(validationErrors).toEqual([]);
+      }
+    );
+
+    it("should fail if class is not a valid UserClass", () => {
+      const body = { ...validBody };
+      //@ts-expect-error implicit any
+      body.character.class = "invalid";
+      const validationErrors = validator({
+        body,
+      });
+
+      expect(validationErrors).toEqual([
+        `/body/character/class must be equal to one of the allowed values`,
       ]);
     });
   });
