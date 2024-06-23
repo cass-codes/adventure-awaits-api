@@ -99,7 +99,6 @@ describe("CreateGameSchema", () => {
         const body = { ...validBody };
         //@ts-expect-error implicit any
         delete body.character[field];
-        console.log("body", body);
         const validationErrors = validator({
           body,
         });
