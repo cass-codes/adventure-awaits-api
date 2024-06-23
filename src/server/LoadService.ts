@@ -7,7 +7,7 @@ export class LoadService {
     return getUser();
   }
   static async getGame(gameId: string): Promise<Game> {
-    const game = await GameRepository.getGame(gameId);
+    const game = await new GameRepository().getGame(gameId);
     return game;
   }
 }

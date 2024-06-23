@@ -58,6 +58,10 @@ const GameSchema = new Schema({
     type: Types.ObjectId,
     required: true,
   },
+  userId: {
+    type: String,
+    required: false,
+  },
   character: CharacterSchema,
   screenId: {
     type: String,
