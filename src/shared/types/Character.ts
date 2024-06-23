@@ -1,4 +1,4 @@
-import { Relationship } from "./Game";
+import { Relationship } from "./Relationship";
 import { Quest } from "./Quest";
 
 export enum Tavern {
