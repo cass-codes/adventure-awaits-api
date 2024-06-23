@@ -1,26 +1,9 @@
 import { createValidationFromSchema } from "../../../shared/middleware/ajv-validation";
-import createGameSchema from "./create-game-schema";
+import { createGameSchema, type CreateGameDto } from "./create-game-schema";
 
 describe("CreateGameSchema", () => {
   const validator = createValidationFromSchema(createGameSchema);
-  let validBody: {
-    userId?: string;
-    day: number;
-    screen: string;
-    character: {
-      characterName: string;
-      class: string;
-      stats: {
-        goodness: number;
-        cleverness: number;
-        sneakiness: number;
-        brawn: number;
-        magic: number;
-        charm: number;
-      };
-      money: { gold: number; pennies: number };
-    };
-  };
+  let validBody: CreateGameDto;
 
   beforeEach(() => {
     validBody = {

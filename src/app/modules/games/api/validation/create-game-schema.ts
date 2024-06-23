@@ -1,30 +1,32 @@
 import { JSONSchemaType } from "ajv";
 
-export interface GameSchema {
-  body: {
-    userId?: string;
-    day: number;
-    screen: string;
-    character: {
-      characterName: string;
-      class: string;
-      stats: {
-        goodness: number;
-        cleverness: number;
-        sneakiness: number;
-        brawn: number;
-        magic: number;
-        charm: number;
-      };
-      money: {
-        gold: number;
-        pennies: number;
-      };
+export interface CreateGameDto {
+  userId?: string;
+  day: number;
+  screen: string;
+  character: {
+    characterName: string;
+    class: string;
+    stats: {
+      goodness: number;
+      cleverness: number;
+      sneakiness: number;
+      brawn: number;
+      magic: number;
+      charm: number;
+    };
+    money: {
+      gold: number;
+      pennies: number;
     };
   };
 }
 
-const createGameSchema: JSONSchemaType<GameSchema> = {
+interface GameSchema {
+  body: CreateGameDto;
+}
+
+export const createGameSchema: JSONSchemaType<GameSchema> = {
   type: "object",
   additionalProperties: true,
   required: ["body"],
@@ -103,5 +105,3 @@ const createGameSchema: JSONSchemaType<GameSchema> = {
     },
   },
 };
-
-export default createGameSchema;

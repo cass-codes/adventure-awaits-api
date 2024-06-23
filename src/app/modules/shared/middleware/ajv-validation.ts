@@ -22,7 +22,6 @@ export function createValidationFromSchema<T>(schema: JSONSchemaType<T>) {
 
     const returnval = validate.errors
       ?.map((errorObj) => {
-        console.log("error obj", errorObj);
         return `${errorObj.instancePath ? errorObj.instancePath : ""} ${
           errorObj.message
         }`;
