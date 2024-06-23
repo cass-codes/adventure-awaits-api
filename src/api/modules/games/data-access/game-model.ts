@@ -1,34 +1,75 @@
 import { Schema, Types, model } from "mongoose";
 
-const GameSchema = new Schema({
-  _id: Types.ObjectId,
-  screenId: String,
-  characterName: String,
-  class: String, // enum of UserClass
+const statsSchema = {
+  type: Number,
+  $gte: -5,
+  $lte: 5,
+};
+
+const CharacterSchema = {
+  characterName: {
+    type: String,
+    required: true,
+  },
+  class: {
+    type: String,
+    required: true,
+    enum: ["warrior", "mage", "rogue", "bard"], // TODO make real enum
+  },
   stats: {
-    goodness: Number, // min of -5, max of 5
-    cleverness: Number, // min of -5, max of 5
-    sneakiness: Number, // min of -5, max of 5
-    brawn: Number, // min of -5, max of 5
-    magic: Number, // min of -5, max of 5
-    charm: Number, // min of -5, max of 5
+    goodness: statsSchema,
+    cleverness: statsSchema,
+    sneakiness: statsSchema,
+    brawn: statsSchema,
+    magic: statsSchema,
+    charm: statsSchema,
   },
   money: {
-    gold: Number,
-    pennies: Number,
+    gold: {
+      type: Number,
+      default: 0,
+    },
+    pennies: {
+      type: Number,
+      default: 0,
+    },
   },
-  inventory: [Types.ObjectId], // reference to _id of Items
+  inventory: {
+    type: Array,
+    items: {
+      type: Types.ObjectId,
+    },
+    default: [],
+  },
   relationships: {
-    type: Map,
+    type: Array,
     of: {
       dayMet: Number, // the number of the day that the user met the person
       relationshipValue: Number, // how good of friends are they?
     },
-    default: {},
+    default: [],
+  },
+};
+
+const GameSchema = new Schema({
+  _id: {
+    type: Types.ObjectId,
+    required: true,
+  },
+  character: CharacterSchema,
+  screenId: {
+    type: String,
+    required: true,
+  },
+  day: {
+    type: Number,
+    required: true,
   },
   quests: {
     type: Array,
-    of: Object,
+    items: {
+      type: Object,
+    },
     default: [],
   },
 });
