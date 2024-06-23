@@ -1,4 +1,5 @@
 import { Schema, Types, model } from "mongoose";
+import { UserClass } from "../../../../shared/types/Character";
 
 const statsSchema = {
   type: Number,
@@ -14,7 +15,7 @@ const CharacterSchema = {
   class: {
     type: String,
     required: true,
-    enum: ["warrior", "mage", "rogue", "bard"], // TODO make real enum
+    enum: UserClass,
   },
   stats: {
     goodness: statsSchema,
