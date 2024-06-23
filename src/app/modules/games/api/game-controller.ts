@@ -20,3 +20,14 @@ export async function createNewGame(
     next(error);
   }
 }
+
+export async function getGame(req: Request, res: Response, next: NextFunction) {
+  try {
+    const gameId = req.params.gameId;
+    const userId = req.query.userId as string;
+    const game = await gameService.getGame(gameId, userId);
+    res.status(200).send(game);
+  } catch (error) {
+    next(error);
+  }
+}

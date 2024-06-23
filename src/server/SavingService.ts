@@ -24,7 +24,7 @@ export class SavingService {
   async saveGame(gameId: string /*, screenId: string */) {
     // const user = getUser();
     if (gameId) {
-      const currentGame = await GameRepository.getGame(gameId);
+      const currentGame = await new GameRepository().getGame(gameId);
       if (currentGame) {
         // await this.gameRepository.updateGame(gameId, user, screenId);
         // return gameId;
@@ -70,7 +70,7 @@ export class SavingService {
   }
 
   static async loadGame(gameId: string): Promise<Game> {
-    const game = await GameRepository.getGame(gameId);
+    const game = await new GameRepository().getGame(gameId);
     return game;
   }
 

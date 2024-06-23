@@ -12,4 +12,13 @@ export class GameService {
     const result = await this.gameRepository.insertGame(game);
     return result;
   }
+
+  async getGame(gameId: string, userId: string) {
+    const game = await this.gameRepository.getGame(gameId);
+    if (game.userId && game.userId !== userId) {
+      // TODO once userId is required update this check
+      throw new Error("Unauthorized");
+    }
+    return game;
+  }
 }

@@ -4,6 +4,7 @@ import { DbGame } from "../types";
 export function convertDBObjectToGame(game: DbGame): Game {
   return {
     _id: game._id.toString(),
+    userId: game.userId,
     screenId: game.screenId,
     day: game.day,
     character: game.character,

@@ -1,16 +1,12 @@
 import { Router } from "express";
-import { LoadService } from "../../../../server/LoadService";
 import { validationFactory } from "../../shared/middleware";
-import { createGameSchema } from "./validation/create-game-schema";
-import { createNewGame } from "./game-controller";
+import { createGameSchema, getGameSchema } from "./validation";
+import { createNewGame, getGame } from "./game-controller";
 
 const gameRouter = Router();
 
 gameRouter.post("/", validationFactory(createGameSchema), createNewGame);
 
-gameRouter.get("/:gameId", async (req, res) => {
-  const game = await LoadService.getGame(req.params.gameId);
-  res.json(game);
-});
+gameRouter.get("/:gameId", validationFactory(getGameSchema), getGame);
 
 export { gameRouter };

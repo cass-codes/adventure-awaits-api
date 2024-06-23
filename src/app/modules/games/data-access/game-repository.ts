@@ -27,7 +27,7 @@ export class GameRepository {
     // return madeGame;
   }
 
-  static async getGame(gameId: string): Promise<Game> {
+  async getGame(gameId: string): Promise<Game> {
     const game = await GameModel.findById(gameId);
     if (!game) {
       throw new Error("Game not found");
