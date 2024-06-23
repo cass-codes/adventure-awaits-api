@@ -1,28 +1,30 @@
 import { Types } from "mongoose";
-import { Game } from "../../../../shared/types/Game";
 import { GameModel } from "./game-model";
 import { Character } from "../../../../shared/types/Character";
-import { convertDBObjectToGame } from "../../../../data-access/converters/convertDBObjectToGame";
+import { convertDBObjectToGame } from "./converters/convertDBObjectToGame";
+import { Game, NewGame } from "../service/types";
+import { DbGame } from "./types";
 
 export class GameRepository {
-  async insertGame(character: Character, screenId: string) {
-    const game: Game = {
+  async insertGame(newGame: NewGame): Promise<Game> {
+    const game: DbGame = {
+      ...newGame,
       _id: new Types.ObjectId(),
-      screenId,
-      characterId: character._id,
+      quests: [],
+      inventory: [],
+      relationships: {},
     };
-    const res = await GameModel.create(game);
-    return res;
+    const res = await GameModel.create<DbGame>(game);
+    return convertDBObjectToGame(res);
   }
 
   async updateGame(gameId: string, character: Character, screenId: string) {
-    const game: Omit<Game, "_id"> = {
-      screenId,
-      characterId: character._id,
-    };
-
-    const madeGame = await GameModel.findByIdAndUpdate(gameId, game);
-    return madeGame;
+    // const game: Omit<Game, "_id"> = {
+    //   screen: screenId,
+    //   character: character,
+    // };
+    // const madeGame = await GameModel.findByIdAndUpdate(gameId, game);
+    // return madeGame;
   }
 
   static async getGame(gameId: string): Promise<Game> {

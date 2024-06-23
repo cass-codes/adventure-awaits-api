@@ -1,5 +1,6 @@
-import { Schema, Types, model } from "mongoose";
+import { Model, Schema, Types, model } from "mongoose";
 import { UserClass } from "../../../../shared/types/Character";
+import { DbGame } from "./types";
 
 const statsSchema = {
   type: Number,
@@ -8,7 +9,7 @@ const statsSchema = {
 };
 
 const CharacterSchema = {
-  characterName: {
+  name: {
     type: String,
     required: true,
   },
@@ -75,4 +76,4 @@ const GameSchema = new Schema({
   },
 });
 
-export const GameModel = model("games", GameSchema);
+export const GameModel = model<DbGame, Model<DbGame>>("games", GameSchema);

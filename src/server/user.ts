@@ -9,7 +9,7 @@ import {
   UserClass,
 } from "../shared/types/Character";
 import { evalPlusMinusInput } from "./helper";
-import { Relationship } from "../shared/types/Game";
+import { Relationship } from "../shared/types/Relationship";
 
 class Character implements Character {
   _id: string = "";

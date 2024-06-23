@@ -1,5 +1,5 @@
 import { GameRepository } from "../app/modules/games/data-access/game-repository";
-import { Game } from "../shared/types/Game";
+import { Game } from "../app/modules/games/service/types";
 import { getUser } from "./user";
 
 export class LoadService {

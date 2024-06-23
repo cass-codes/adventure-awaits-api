@@ -16,7 +16,7 @@ import {
   getUser,
 } from "./user";
 import { GameRepository } from "../app/modules/games/data-access/game-repository";
-import { Game } from "../shared/types/Game";
+import { Game } from "../app/modules/games/service/types";
 
 export class SavingService {
   constructor(private gameRepository: GameRepository) {}
