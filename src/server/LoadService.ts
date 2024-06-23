@@ -1,4 +1,4 @@
-import { GameRepository } from "../data-access/game-repository";
+import { GameRepository } from "../api/modules/games/data-access/game-repository";
 import { Game } from "../shared/types/Game";
 import { getUser } from "./user";
 

@@ -15,7 +15,7 @@ import {
   setTavern,
   getUser,
 } from "./user";
-import { GameRepository } from "../data-access/game-repository";
+import { GameRepository } from "../api/modules/games/data-access/game-repository";
 import { Game } from "../shared/types/Game";
 
 export class SavingService {

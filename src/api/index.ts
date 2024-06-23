@@ -2,7 +2,7 @@ import { Router } from "express";
 import { healthRouter } from "./health-router";
 import { screenRouter } from "./screen-router";
 import { saveRouter } from "./save-router";
-import { gameRouter } from "./modules/games/game-router";
+import { gameRouter } from "./modules/games/api/game-router";
 
 const apiRouter = Router();
 

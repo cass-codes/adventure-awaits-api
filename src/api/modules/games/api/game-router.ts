@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { LoadService } from "../../../server/LoadService";
+import { LoadService } from "../../../../server/LoadService";
 
 const gameRouter = Router();
 

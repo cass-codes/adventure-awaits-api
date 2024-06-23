@@ -1,8 +1,8 @@
 import { Types } from "mongoose";
-import { Game } from "../shared/types/Game";
+import { Game } from "../../../../shared/types/Game";
 import { GameModel } from "./game-model";
-import { Character } from "../shared/types/Character";
-import { convertDBObjectToGame } from "./converters/convertDBObjectToGame";
+import { Character } from "../../../../shared/types/Character";
+import { convertDBObjectToGame } from "../../../../data-access/converters/convertDBObjectToGame";
 
 export class GameRepository {
   async insertGame(character: Character, screenId: string) {

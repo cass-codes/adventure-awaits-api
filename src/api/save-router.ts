@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { SavingService } from "../server/SavingService";
-import { GameRepository } from "../data-access/game-repository";
+import { GameRepository } from "./modules/games/data-access/game-repository";
 import { Character } from "../shared/types/Character";
 
 const saveRouter = Router();
