@@ -10,6 +10,7 @@ gameRouter.post(
   validationFactory(createGameSchema),
   async (req: Request, res, next) => {
     console.log("passed validation");
+    res.sendStatus(501); // Full route not yet implemented
   }
 );
 

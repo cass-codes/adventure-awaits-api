@@ -46,6 +46,7 @@ export function validationFactory<T>(jsonSchema: JSONSchemaType<T>) {
         res.status(400);
         throw new Error(message);
       }
+      next();
     } catch (error) {
       next(error);
     }

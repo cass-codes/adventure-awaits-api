@@ -2,7 +2,7 @@ import { JSONSchemaType } from "ajv";
 
 export interface GameSchema {
   body: {
-    userId: string;
+    userId?: string;
     day: number;
     screen: string;
     character: {
@@ -33,7 +33,7 @@ const createGameSchema: JSONSchemaType<GameSchema> = {
       type: "object",
       additionalProperties: false,
       properties: {
-        userId: { type: "string" }, // will be hooked up at some point but at the moment can just be blank
+        userId: { type: "string", nullable: true }, // will be hooked up at some point but at the moment can just be blank
         day: { type: "number", minimum: 0 },
         screen: { type: "string" },
         character: {
