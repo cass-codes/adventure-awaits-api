@@ -1,5 +1,4 @@
 import { Relationship } from "./Relationship";
-import { Quest } from "./Quest";
 
 export enum Tavern {
   TheRustySword = "The Rusty Sword",
@@ -65,7 +64,6 @@ export interface Character {
     Serena?: Relationship;
     Kiirion?: Relationship;
   };
-  quests: { [key: string]: Quest };
   skills: string[];
   tavern?: Tavern;
 }
