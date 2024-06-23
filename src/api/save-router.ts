@@ -8,7 +8,7 @@ const saveRouter = Router();
 const gameRepository = new GameRepository();
 const savingService = new SavingService(gameRepository);
 
-saveRouter.post("/", async (req, res, next) => {
+saveRouter.post("/", async (req, res) => {
   const { screenId, gameId } = req.body;
   console.log("req.body", req.body);
   const id = await savingService.saveGame(gameId, screenId);
@@ -16,7 +16,7 @@ saveRouter.post("/", async (req, res, next) => {
   res.json(id);
 });
 
-saveRouter.post("/:gameId", (req, res, next) => {
+saveRouter.post("/:gameId", (req, res) => {
   const { value, objectPath, screenId } = req.body;
   const { gameId } = req.params;
 

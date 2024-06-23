@@ -21,8 +21,8 @@ import { Game } from "../shared/types/Game";
 export class SavingService {
   constructor(private gameRepository: GameRepository) {}
 
-  async saveGame(gameId: string, screenId: string) {
-    const user = getUser();
+  async saveGame(gameId: string /*, screenId: string */) {
+    // const user = getUser();
     if (gameId) {
       const currentGame = await GameRepository.getGame(gameId);
       if (currentGame) {

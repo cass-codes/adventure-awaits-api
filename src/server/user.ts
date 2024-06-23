@@ -106,7 +106,7 @@ export function updateQuest(
   property1: string,
   property2?: string
 ) {
-  let currentQuests = user.quests;
+  const currentQuests = user.quests;
   const quest = currentQuests[value] || currentQuests[property1];
   if (!quest && !property2) {
     user.quests = { ...user.quests, [value]: dayZeroQuests[value] };
