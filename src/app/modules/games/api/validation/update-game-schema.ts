@@ -26,14 +26,25 @@ export interface UpdateGameDto {
 }
 
 interface GameSchema {
+  params: {
+    gameId: string;
+  };
   body: UpdateGameDto;
 }
 
 export const updateGameSchema: JSONSchemaType<GameSchema> = {
   type: "object",
   additionalProperties: true,
-  required: ["body"],
+  required: ["body", "params"],
   properties: {
+    params: {
+      type: "object",
+      additionalProperties: false,
+      required: ["gameId"],
+      properties: {
+        gameId: { type: "string" },
+      },
+    },
     body: {
       type: "object",
       additionalProperties: false,
