@@ -1,7 +1,6 @@
-import { Game } from "../../service/types";
-import { DbGame } from "../types";
+import { Game, GameDocument } from "../../service/types";
 
-export function convertDBObjectToGame(game: DbGame): Game {
+export function convertDBObjectToGame(game: GameDocument): Game {
   return {
     _id: game._id.toString(),
     userId: game.userId,
@@ -9,7 +8,5 @@ export function convertDBObjectToGame(game: DbGame): Game {
     day: game.day,
     character: game.character,
     quests: game.quests ?? [],
-    inventory: game.inventory ?? [],
-    relationships: game.relationships ?? {},
   };
 }

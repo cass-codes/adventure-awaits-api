@@ -1,32 +1,38 @@
-import { UserClass } from "../../../../shared/types/Character";
+import { Types } from "mongoose";
+import { Character } from "../../../../shared/types/Character";
 
-interface NewCharacter {
-  name?: string;
-  class?: UserClass;
-  stats: {
-    goodness: number;
-    sneakiness: number;
-    cleverness: number;
-    brawn: number;
-    magic: number;
-    charm: number;
-  };
-  money: {
-    gold: number;
-    pennies: number;
-  };
-}
-
-export interface NewGame {
+export interface GameCreationProps {
+  quests: unknown[];
   userId?: string; // Keeping not required for now
   day: number;
   screenId: string;
-  character: NewCharacter;
+  character: Character;
 }
 
-export interface Game extends NewGame {
+export interface Game extends GameCreationProps {
   _id: string;
-  quests: unknown[];
-  inventory: unknown[];
-  relationships: object;
+}
+
+export interface GameDocument extends GameCreationProps {
+  _id: Types.ObjectId;
+}
+
+export interface UpdateGame {
+  day?: number;
+  screenId?: string;
+  character?: {
+    stats?: {
+      goodness?: number;
+      cleverness?: number;
+      sneakiness?: number;
+      brawn?: number;
+      magic?: number;
+      charm?: number;
+    };
+    money?: {
+      gold?: number;
+      pennies?: number;
+    };
+    relationships?: object;
+  };
 }

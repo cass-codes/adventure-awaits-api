@@ -5,7 +5,7 @@ import {
   getGameSchema,
   updateGameSchema,
 } from "./validation";
-import { createNewGame, getGame } from "./game-controller";
+import { createNewGame, getGame, updateGame } from "./game-controller";
 
 const gameRouter = Router();
 
@@ -13,9 +13,6 @@ gameRouter.post("/", validationFactory(createGameSchema), createNewGame);
 
 gameRouter.get("/:gameId", validationFactory(getGameSchema), getGame);
 
-gameRouter.put("/:gameId", validationFactory(updateGameSchema), (req, res) => {
-  console.log("passed validation");
-  res.sendStatus(501);
-});
+gameRouter.patch("/:gameId", validationFactory(updateGameSchema), updateGame);
 
 export { gameRouter };
