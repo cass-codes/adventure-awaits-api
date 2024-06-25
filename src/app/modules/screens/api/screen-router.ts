@@ -5,6 +5,10 @@ import { getScreenSchema } from "./validation";
 
 const screenRouter = Router();
 
-screenRouter.get("/:id", validationFactory(getScreenSchema), getScreenById);
+screenRouter.get(
+  "/:screenId",
+  validationFactory(getScreenSchema),
+  getScreenById
+);
 
 export { screenRouter };

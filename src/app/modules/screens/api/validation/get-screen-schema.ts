@@ -15,6 +15,7 @@ export type GetScreenDTO = Request & GetScreenSchema;
 export const getScreenSchema: JSONSchemaType<GetScreenSchema> = {
   type: "object",
   additionalProperties: true,
+  required: ["query", "params"],
   properties: {
     query: {
       type: "object",
@@ -25,9 +26,10 @@ export const getScreenSchema: JSONSchemaType<GetScreenSchema> = {
     params: {
       type: "object",
       additionalProperties: false,
+      properties: {
+        screenId: { type: "string" },
+      },
       required: ["screenId"],
-      properties: { screenId: { type: "string" } },
     },
   },
-  required: ["query", "params"],
 };
