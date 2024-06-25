@@ -9,7 +9,11 @@ export class GameRepository {
   }
 
   async updateGame(gameId: string, game: UpdateGame): Promise<Game> {
-    const updatedGame = await GameModel.findByIdAndUpdate(gameId, game);
+    const updatedGame = await GameModel.findOneAndUpdate(
+      { _id: gameId },
+      { $set: game },
+      { returnDocument: "after" }
+    );
     if (!updatedGame) {
       throw new Error("Game not found");
     }
