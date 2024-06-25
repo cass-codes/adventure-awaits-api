@@ -36,7 +36,7 @@ export class SavingService {
   }
 
   async updateGame(gameId: string, user: Character, screenId: string) {
-    await this.gameRepository.updateGame(gameId, user, screenId);
+    await this.gameRepository.updateGame(gameId, { character: user, screenId });
   }
 
   static saveContent(input: string, savePath: string): Character {
