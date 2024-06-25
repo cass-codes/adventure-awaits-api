@@ -1,5 +1,5 @@
 import { ChoiceOption, Screen } from "../../../../../shared/types/Screen";
-import { LoadService } from "../../../../../server/LoadService";
+import { Game } from "../../../../../app/modules/games/service/types";
 
 const visitTheBlacksmith: Screen = {
   _id: "visitTheBlacksmith",
@@ -82,9 +82,8 @@ const buyTheShield: Screen = {
         screenId: "buyItOutRight_shield",
         saveValues: [{ savePath: "User.coins", saveValue: "-2" }], // TODO: Once inventory is added, add shield to the inventory
       },
-      (): ChoiceOption => {
-        const user = LoadService.loadUser();
-        if (user.stats.charm < 2) {
+      (game: Game): ChoiceOption => {
+        if (game.character.stats.charm < 2) {
           return {
             type: "save",
             optionText: "Try to haggle",
@@ -196,16 +195,15 @@ const buyTheArmor: Screen = {
         screenId: "buyItOutRight",
         saveValues: [{ savePath: "User.coins", saveValue: "-15" }], // TODO: Once inventory is added, add armor to the inventory
       },
-      (): ChoiceOption => {
-        const user = LoadService.loadUser();
-        if (user.stats.charm < 3) {
+      (game: Game): ChoiceOption => {
+        if (game.character.stats.charm < 3) {
           return {
             type: "save",
             optionText: "Try to haggle",
             screenId: "haggleFail_armor",
             saveValues: [{ savePath: "User.stats.charm", saveValue: "++" }],
           };
-        } else if (user.stats.charm < 4) {
+        } else if (game.character.stats.charm < 4) {
           return {
             type: "save",
             optionText: "Try to haggle",
@@ -365,9 +363,8 @@ const buyTheSword: Screen = {
         screenId: "buyItOutRight_sword",
         saveValues: [{ savePath: "User.coins", saveValue: "-5" }], // TODO: Once inventory is added, add sword to the inventory
       },
-      (): ChoiceOption => {
-        const user = LoadService.loadUser();
-        if (user.stats.charm < 3) {
+      (game: Game): ChoiceOption => {
+        if (game.character.stats.charm < 3) {
           return {
             type: "save",
             optionText: "Try to haggle",

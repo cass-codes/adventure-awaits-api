@@ -1,5 +1,5 @@
 import { ChoiceOption, Screen } from "../../../shared/types/Screen";
-import { LoadService } from "../../../server/LoadService";
+import { Game } from "../../../app/modules/games/service/types";
 
 const theAdventureBegins: Screen = {
   _id: "theAdventureBegins",
@@ -103,9 +103,8 @@ const seekSolitude: Screen = {
       {
         type: "screen",
         optionText: "Help",
-        screenId: (): string => {
-          const user = LoadService.loadUser();
-          if (user.stats.charm >= 1) {
+        screenId: (game: Game) => {
+          if (game.character.stats.charm >= 1) {
             return "stepInToHelp_success";
           }
           return "failedAtHelping";
@@ -177,9 +176,8 @@ const joinTheFestivities: Screen = {
       {
         type: "screen",
         optionText: "Arm wrestle",
-        screenId: (): string => {
-          const user = LoadService.loadUser();
-          if (user.stats.brawn >= 1) {
+        screenId: (game: Game): string => {
+          if (game.character.stats.brawn >= 1) {
             return "winArmWrestle";
           }
           return "loseArmWrestle";
@@ -566,9 +564,8 @@ const askedToPlay: Screen = {
       {
         type: "screen",
         optionText: "Yes",
-        screenId: (): string => {
-          const user = LoadService.loadUser();
-          if (user.stats.charm >= 2) {
+        screenId: (game: Game): string => {
+          if (game.character.stats.charm >= 2) {
             return "playASong_success";
           }
           return "playASong_failure";
@@ -1355,8 +1352,8 @@ const intervene: Screen = {
   choiceInformation: {
     text: "Do you try to defuse the situation or take a more aggressive approach?",
     options: [
-      (): ChoiceOption => {
-        if (LoadService.loadUser().stats.charm >= 1) {
+      (game: Game): ChoiceOption => {
+        if (game.character.stats.charm >= 1) {
           return {
             type: "screen",
             optionText: "Defuse",

@@ -1,49 +1,47 @@
-import { LoadService } from "../../../../server/LoadService";
+import { Game } from "../../../../app/modules/games/service/types";
 import { SaveChoiceOption } from "../../../../shared/types/Screen";
 
-export function evalStats(): Pick<
-  SaveChoiceOption,
-  "type" | "optionText" | "screenId"
->[] {
-  const user = LoadService.loadUser();
+export function evalStats(
+  game: Game
+): Pick<SaveChoiceOption, "type" | "optionText" | "screenId">[] {
   const options: Pick<SaveChoiceOption, "type" | "optionText" | "screenId">[] =
     [];
-  if (user.stats.brawn > 0) {
+  if (game.character.stats.brawn > 0) {
     options.push({
       type: "save",
       optionText: "I'm pretty strong.",
       screenId: "prettyStrong",
     });
   }
-  if (user.stats.goodness > 0) {
+  if (game.character.stats.goodness > 0) {
     options.push({
       type: "save",
       optionText: "People say I'm a fair judge.",
       screenId: "fairJudge",
     });
   }
-  if (user.stats.sneakiness > 0) {
+  if (game.character.stats.sneakiness > 0) {
     options.push({
       type: "save",
       optionText: "I'm good a sneaking around.",
       screenId: "sneakingAround",
     });
   }
-  if (user.stats.cleverness > 0) {
+  if (game.character.stats.cleverness > 0) {
     options.push({
       type: "save",
       optionText: "I'm clever and good with books.",
       screenId: "cleverBooks",
     });
   }
-  if (user.stats.magic > 0) {
+  if (game.character.stats.magic > 0) {
     options.push({
       type: "save",
       optionText: "I'm decent with magic and the arcane.",
       screenId: "magicAndArcane",
     });
   }
-  if (user.stats.charm > 0) {
+  if (game.character.stats.charm > 0) {
     options.push({
       type: "save",
       optionText: "I'm good with people.",

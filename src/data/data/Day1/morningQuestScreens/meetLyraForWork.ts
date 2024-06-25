@@ -3,12 +3,11 @@ import {
   PictureMain,
   Screen,
 } from "../../../../shared/types/Screen";
-import { SavingService } from "../../../../server/SavingService";
 import { evalStats } from "./_shared";
-import { LoadService } from "../../../../server/LoadService";
+import { Game } from "../../../../app/modules/games/service/types";
 
-function evalStatsForLyraAndHunstan(): EvaluatedChoiceOption[] {
-  const options = evalStats();
+function evalStatsForLyraAndHunstan(game: Game): EvaluatedChoiceOption[] {
+  const options = evalStats(game);
   const newOptions: EvaluatedChoiceOption[] = [];
   options.forEach((option) => {
     const newOption: EvaluatedChoiceOption = {
@@ -44,10 +43,9 @@ const meetLyraForWork: Screen = {
     },
     `You look at the man next to her and shake his hand. He grunts at you and
     Lyra laughs.`,
-    (): PictureMain => {
-      const user = LoadService.loadUser();
-      return user.relationships.Hunstan &&
-        user.relationships.Hunstan.relationshipValue > 0
+    (game: Game): PictureMain => {
+      return game.character.relationships?.Hunstan &&
+        game.character.relationships.Hunstan.relationshipValue > 0
         ? {
             url: "Hunstan.png",
             alt: "Hunstan",
