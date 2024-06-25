@@ -1,5 +1,5 @@
 import { GameRepository } from "../data-access/game-repository";
-import { GameCreationProps, UpdateGame } from "./types";
+import { Game, GameCreationProps, UpdateGame } from "./types";
 
 export class GameService {
   gameRepository: GameRepository;
@@ -8,12 +8,12 @@ export class GameService {
     this.gameRepository = dbGameRepository;
   }
 
-  async createGame(game: GameCreationProps) {
+  async createGame(game: GameCreationProps): Promise<Game> {
     const result = await this.gameRepository.insertGame(game);
     return result;
   }
 
-  async getGame(gameId: string, userId: string) {
+  async getGame(gameId: string, userId: string): Promise<Game> {
     const game = await this.gameRepository.getGame(gameId);
     if (game.userId && game.userId !== userId) {
       // TODO once userId is required update this check
@@ -22,8 +22,13 @@ export class GameService {
     return game;
   }
 
-  async updateGame(gameId: string, game: UpdateGame) {
+  async updateGame(gameId: string, game: UpdateGame): Promise<Game> {
     const result = await this.gameRepository.updateGame(gameId, game);
     return result;
+  }
+
+  async getGames(userId: string): Promise<Game[]> {
+    const games = await this.gameRepository.getGames(userId);
+    return games;
   }
 }
