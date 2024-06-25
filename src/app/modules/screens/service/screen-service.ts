@@ -2,8 +2,8 @@ import {
   ChoiceOption,
   EvaluatedChoiceOption,
   Screen,
-} from "../shared/types/Screen";
-import { screens } from "../data/data/screens";
+} from "../../../../shared/types/Screen";
+import { screens } from "../../../../data/data/screens";
 
 export class ScreenService {
   static getScreenById(id: string): Screen {
@@ -18,7 +18,9 @@ export class ScreenService {
     return ids.map((id) => ScreenService.getScreenById(id));
   }
 
-  static evaluateScreen(_screen: Screen): Screen {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  static evaluateScreen(_screen: Screen, gameId?: string): Screen {
+    // Will be done in [16]
     const screen = { ..._screen };
     const main = screen.main.map((_line) => {
       return _line instanceof Function ? _line() : _line;
