@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { healthRouter } from "./health-router";
-import { screenRouter } from "./screen-router";
+import { screenRouter } from "./modules/screens/api/screen-router";
 import { saveRouter } from "./save-router";
 import { gameRouter } from "./modules/games/api/game-router";
 
