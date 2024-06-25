@@ -6,6 +6,7 @@ import {
 import { screens } from "../../../../data/data/screens";
 import { GameService } from "../../games/service/game-service";
 import { GameRepository } from "../../games/data-access/game-repository";
+import { isScreenFunction } from "./types";
 
 export class ScreenService {
   static getScreenById(id: string): Screen {
@@ -16,32 +17,29 @@ export class ScreenService {
     return screen;
   }
 
-  static getScreensByIds(ids: string[]): Screen[] {
-    return ids.map((id) => ScreenService.getScreenById(id));
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  static evaluateScreen(
+  static async evaluateScreen(
     _screen: Screen,
     gameId: string,
     userId: string
-  ): Screen {
-    const game = new GameService(new GameRepository()).getGame(gameId, userId);
+  ): Promise<Screen> {
+    const game = await new GameService(new GameRepository()).getGame(
+      gameId,
+      userId
+    );
     const screen = { ..._screen };
     const main = screen.main.map((_line) => {
-      return _line instanceof Function ? _line() : _line;
+      return isScreenFunction(_line) ? _line(game) : _line;
     });
-    const _options =
-      screen.choiceInformation.options instanceof Function
-        ? screen.choiceInformation.options()
-        : screen.choiceInformation.options;
+    const _options = isScreenFunction(screen.choiceInformation.options)
+      ? screen.choiceInformation.options(game)
+      : screen.choiceInformation.options;
     const options = _options.map((_option: ChoiceOption) => {
-      const option: EvaluatedChoiceOption =
-        _option instanceof Function ? _option() : _option;
-      const screenId =
-        option.screenId instanceof Function
-          ? option.screenId()
-          : option.screenId;
+      const option: EvaluatedChoiceOption = isScreenFunction(_option)
+        ? _option(game)
+        : _option;
+      const screenId = isScreenFunction(option.screenId)
+        ? option.screenId(game)
+        : option.screenId;
       return { ...option, screenId };
     });
 

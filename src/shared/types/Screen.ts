@@ -1,3 +1,5 @@
+import { ScreenFunction } from "../../app/modules/screens/service/types";
+
 export interface Screen {
   _id: string;
   header: string;
@@ -14,18 +16,18 @@ export interface PictureMain {
   sideText: string[];
 }
 
-export type MainContentProps = (string | PictureMain | Function)[];
+export type MainContentProps = (string | PictureMain | ScreenFunction)[];
 
 // Choices
 
 export interface ChoiceInfo {
   text: string;
-  options: ChoiceOption[] | Function;
+  options: ChoiceOption[] | ScreenFunction;
 }
 
 interface BaseChoiceOption {
   optionText: string;
-  screenId: string | Function;
+  screenId: string | ScreenFunction;
 }
 
 export interface ScreenChoiceOption extends BaseChoiceOption {
@@ -56,4 +58,4 @@ export type EvaluatedChoiceOption =
   | QuitChoiceOption;
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-export type ChoiceOption = EvaluatedChoiceOption | Function;
+export type ChoiceOption = EvaluatedChoiceOption | ScreenFunction;
