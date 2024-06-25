@@ -1,5 +1,5 @@
 import { GameRepository } from "../data-access/game-repository";
-import { NewGame } from "./types";
+import { GameCreationProps, UpdateGame } from "./types";
 
 export class GameService {
   gameRepository: GameRepository;
@@ -8,7 +8,7 @@ export class GameService {
     this.gameRepository = dbGameRepository;
   }
 
-  async createGame(game: NewGame) {
+  async createGame(game: GameCreationProps) {
     const result = await this.gameRepository.insertGame(game);
     return result;
   }
@@ -20,5 +20,10 @@ export class GameService {
       throw new Error("Unauthorized");
     }
     return game;
+  }
+
+  async updateGame(gameId: string, game: UpdateGame) {
+    const result = await this.gameRepository.updateGame(gameId, game);
+    return result;
   }
 }

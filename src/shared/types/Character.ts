@@ -1,5 +1,4 @@
 import { Relationship } from "./Relationship";
-import { Quest } from "./Quest";
 
 export enum Tavern {
   TheRustySword = "The Rusty Sword",
@@ -41,7 +40,7 @@ export enum Stat {
 }
 
 export interface Character {
-  _id: string;
+  // _id: string;
   name?: string;
   class?: UserClass;
   stats: {
@@ -56,8 +55,8 @@ export interface Character {
     gold: number;
     pennies: number;
   };
-  motivations?: Motivations[];
-  relationships: {
+  // motivations?: Motivations[];
+  relationships?: {
     Lyra?: Relationship;
     Hunstan?: Relationship;
     Kael?: Relationship;
@@ -65,7 +64,6 @@ export interface Character {
     Serena?: Relationship;
     Kiirion?: Relationship;
   };
-  quests: { [key: string]: Quest };
-  skills: string[];
-  tavern?: Tavern;
+  // skills: string[];
+  // tavern?: Tavern;
 }

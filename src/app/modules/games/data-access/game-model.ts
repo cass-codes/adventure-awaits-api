@@ -1,6 +1,6 @@
 import { Model, Schema, Types, model } from "mongoose";
 import { UserClass } from "../../../../shared/types/Character";
-import { DbGame } from "./types";
+import { GameDocument } from "../service/types";
 
 const statsSchema = {
   type: Number,
@@ -80,4 +80,7 @@ const GameSchema = new Schema({
   },
 });
 
-export const GameModel = model<DbGame, Model<DbGame>>("games", GameSchema);
+export const GameModel = model<GameDocument, Model<GameDocument>>(
+  "games",
+  GameSchema
+);

@@ -1,11 +1,12 @@
-import { NewGame } from "../../service/types";
+import { GameCreationProps } from "../../service/types";
 import { CreateGameDto } from "../validation/create-game-schema";
 
-export function convertDtoToNewGame(dto: CreateGameDto): NewGame {
+export function convertDtoToNewGame(dto: CreateGameDto): GameCreationProps {
   return {
     userId: dto.userId,
     day: dto.day,
     screenId: dto.screen,
+    quests: [],
     character: {
       name: dto.character.characterName,
       class: dto.character.class,
