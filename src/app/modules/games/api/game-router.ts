@@ -3,13 +3,21 @@ import { validationFactory } from "../../shared/middleware";
 import {
   createGameSchema,
   getGameSchema,
+  getGamesSchema,
   updateGameSchema,
 } from "./validation";
-import { createNewGame, getGame, updateGame } from "./game-controller";
+import {
+  createNewGame,
+  getGame,
+  getGames,
+  updateGame,
+} from "./game-controller";
 
 const gameRouter = Router();
 
 gameRouter.post("/", validationFactory(createGameSchema), createNewGame);
+
+gameRouter.get("/", validationFactory(getGamesSchema), getGames);
 
 gameRouter.get("/:gameId", validationFactory(getGameSchema), getGame);
 

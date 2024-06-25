@@ -50,3 +50,17 @@ export async function updateGame(
     next(error);
   }
 }
+
+export async function getGames(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const userId = req.query.userId as string;
+    const games = await gameService.getGames(userId);
+    res.status(200).send(games);
+  } catch (error) {
+    next(error);
+  }
+}
