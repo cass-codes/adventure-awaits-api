@@ -42,4 +42,8 @@ export class GameRepository {
     const games = await GameModel.find<GameDocument>({ userId });
     return games.map(convertDBObjectToGame);
   }
+
+  async deleteGame(gameId: string): Promise<void> {
+    await GameModel.findByIdAndDelete(gameId);
+  }
 }

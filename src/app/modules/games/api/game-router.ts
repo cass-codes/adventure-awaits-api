@@ -8,6 +8,7 @@ import {
 } from "./validation";
 import {
   createNewGame,
+  deleteGame,
   getGame,
   getGames,
   updateGame,
@@ -22,5 +23,7 @@ gameRouter.get("/", validationFactory(getGamesSchema), getGames);
 gameRouter.get("/:gameId", validationFactory(getGameSchema), getGame);
 
 gameRouter.patch("/:gameId", validationFactory(updateGameSchema), updateGame);
+
+gameRouter.delete("/:gameId", validationFactory(getGameSchema), deleteGame);
 
 export { gameRouter };

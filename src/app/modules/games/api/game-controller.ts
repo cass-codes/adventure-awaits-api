@@ -64,3 +64,18 @@ export async function getGames(
     next(error);
   }
 }
+
+export async function deleteGame(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const gameId = req.params.gameId;
+    const userId = req.query.userId as string;
+    await gameService.deleteGame(gameId, userId);
+    res.sendStatus(204);
+  } catch (error) {
+    next(error);
+  }
+}

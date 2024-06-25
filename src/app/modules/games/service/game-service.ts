@@ -31,4 +31,9 @@ export class GameService {
     const games = await this.gameRepository.getGames(userId);
     return games;
   }
+
+  async deleteGame(gameId: string, userId: string): Promise<void> {
+    const gameToDelete = await this.getGame(gameId, userId);
+    await this.gameRepository.deleteGame(gameToDelete._id);
+  }
 }
