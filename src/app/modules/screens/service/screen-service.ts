@@ -4,6 +4,8 @@ import {
   Screen,
 } from "../../../../shared/types/Screen";
 import { screens } from "../../../../data/data/screens";
+import { GameService } from "../../games/service/game-service";
+import { GameRepository } from "../../games/data-access/game-repository";
 
 export class ScreenService {
   static getScreenById(id: string): Screen {
@@ -19,8 +21,12 @@ export class ScreenService {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  static evaluateScreen(_screen: Screen, gameId?: string): Screen {
-    // Will be done in [16]
+  static evaluateScreen(
+    _screen: Screen,
+    gameId: string,
+    userId: string
+  ): Screen {
+    const game = new GameService(new GameRepository()).getGame(gameId, userId);
     const screen = { ..._screen };
     const main = screen.main.map((_line) => {
       return _line instanceof Function ? _line() : _line;
