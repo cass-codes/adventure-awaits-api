@@ -3,7 +3,7 @@ import { ScreenFunction } from "../../app/modules/screens/service/types";
 export interface Screen {
   _id: string;
   header: string;
-  main: MainContentProps;
+  main: MainContentProps | EvaluatedMainContentProps;
   choiceInformation: ChoiceInfo;
 }
 
