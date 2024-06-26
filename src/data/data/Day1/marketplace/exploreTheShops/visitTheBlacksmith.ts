@@ -1,5 +1,8 @@
-import { ChoiceOption, Screen } from "../../../../../shared/types/Screen";
-import { Game } from "../../../../../app/modules/games/service/types";
+import type {
+  EvaluatedChoiceOption,
+  Screen,
+} from "../../../../../shared/types/Screen";
+import type { Game } from "../../../../../app/modules/games/service/types";
 
 const visitTheBlacksmith: Screen = {
   _id: "visitTheBlacksmith",
@@ -82,7 +85,7 @@ const buyTheShield: Screen = {
         screenId: "buyItOutRight_shield",
         saveValues: [{ savePath: "User.coins", saveValue: "-2" }], // TODO: Once inventory is added, add shield to the inventory
       },
-      (game: Game): ChoiceOption => {
+      (game: Game): EvaluatedChoiceOption => {
         if (game.character.stats.charm < 2) {
           return {
             type: "save",
@@ -195,7 +198,7 @@ const buyTheArmor: Screen = {
         screenId: "buyItOutRight",
         saveValues: [{ savePath: "User.coins", saveValue: "-15" }], // TODO: Once inventory is added, add armor to the inventory
       },
-      (game: Game): ChoiceOption => {
+      (game: Game): EvaluatedChoiceOption => {
         if (game.character.stats.charm < 3) {
           return {
             type: "save",
@@ -363,7 +366,7 @@ const buyTheSword: Screen = {
         screenId: "buyItOutRight_sword",
         saveValues: [{ savePath: "User.coins", saveValue: "-5" }], // TODO: Once inventory is added, add sword to the inventory
       },
-      (game: Game): ChoiceOption => {
+      (game: Game): EvaluatedChoiceOption => {
         if (game.character.stats.charm < 3) {
           return {
             type: "save",

@@ -18,6 +18,8 @@ export interface PictureMain {
 
 export type MainContentProps = (string | PictureMain | ScreenFunction)[];
 
+export type EvaluatedMainContentProps = (string | PictureMain)[];
+
 // Choices
 
 export interface ChoiceInfo {
@@ -57,5 +59,11 @@ export type EvaluatedChoiceOption =
   | InputChoiceOption
   | QuitChoiceOption;
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 export type ChoiceOption = EvaluatedChoiceOption | ScreenFunction;
+
+export type FunctionProperties =
+  | EvaluatedChoiceOption
+  | EvaluatedChoiceOption[]
+  | EvaluatedMainContentProps
+  | string
+  | PictureMain;

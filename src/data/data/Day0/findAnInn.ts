@@ -1,5 +1,8 @@
-import { ChoiceOption, Screen } from "../../../shared/types/Screen";
-import { Game } from "../../../app/modules/games/service/types";
+import type {
+  EvaluatedChoiceOption,
+  Screen,
+} from "../../../shared/types/Screen";
+import type { Game } from "../../../app/modules/games/service/types";
 
 const theAdventureBegins: Screen = {
   _id: "theAdventureBegins",
@@ -1352,7 +1355,7 @@ const intervene: Screen = {
   choiceInformation: {
     text: "Do you try to defuse the situation or take a more aggressive approach?",
     options: [
-      (game: Game): ChoiceOption => {
+      (game: Game): EvaluatedChoiceOption => {
         if (game.character.stats.charm >= 1) {
           return {
             type: "screen",

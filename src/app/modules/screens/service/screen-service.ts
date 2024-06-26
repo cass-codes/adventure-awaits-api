@@ -1,6 +1,7 @@
 import {
   ChoiceOption,
   EvaluatedChoiceOption,
+  EvaluatedMainContentProps,
   Screen,
 } from "../../../../shared/types/Screen";
 import { screens } from "../../../../data/data/screens";
@@ -31,11 +32,11 @@ export class ScreenService {
       return isScreenFunction(_line) ? _line(game) : _line;
     });
     const _options = isScreenFunction(screen.choiceInformation.options)
-      ? screen.choiceInformation.options(game)
+      ? (screen.choiceInformation.options(game) as ChoiceOption[])
       : screen.choiceInformation.options;
     const options = _options.map((_option: ChoiceOption) => {
       const option: EvaluatedChoiceOption = isScreenFunction(_option)
-        ? _option(game)
+        ? (_option(game) as EvaluatedChoiceOption)
         : _option;
       const screenId = isScreenFunction(option.screenId)
         ? option.screenId(game)
@@ -45,8 +46,11 @@ export class ScreenService {
 
     return {
       ...screen,
-      main,
-      choiceInformation: { ...screen.choiceInformation, options },
+      main: main as EvaluatedMainContentProps,
+      choiceInformation: {
+        ...screen.choiceInformation,
+        options: options as EvaluatedChoiceOption[],
+      },
     };
   }
 }

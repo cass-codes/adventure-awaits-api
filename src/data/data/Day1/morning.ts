@@ -1,5 +1,8 @@
-import { ChoiceOption, Screen } from "../../../shared/types/Screen";
-import { Game } from "../../../app/modules/games/service/types";
+import type {
+  EvaluatedChoiceOption,
+  Screen,
+} from "../../../shared/types/Screen";
+import type { Game } from "../../../app/modules/games/service/types";
 
 // TODO: check all of these screens to make sure they have the right header.
 // TODO: finish the evalWhichTavern fn and the respective screens
@@ -91,9 +94,9 @@ const wakeUp_SilverSpoon: Screen = {
   },
 };
 
-function evalStartFirstDay(game: Game) {
+function evalStartFirstDay(game: Game): EvaluatedChoiceOption[] {
   const quests = game.quests;
-  const options = [
+  const options: EvaluatedChoiceOption[] = [
     {
       type: "screen",
       optionText: "Explore the marketplace",
@@ -144,7 +147,7 @@ const sitAndChat: Screen = {
   choiceInformation: {
     text: "",
     options: [
-      (_game: Game): ChoiceOption => {
+      (_game: Game) => {
         // TODO Update once the quests stuff has been fixed
         // return game.quests.learnAboutRobberies.status === QuestStatus.notFound ?
         return {
