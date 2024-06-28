@@ -1,5 +1,8 @@
-import { ChoiceOption, Screen } from "../../../../../shared/types/Screen";
-import { LoadService } from "../../../../../server/LoadService";
+import type {
+  EvaluatedChoiceOption,
+  Screen,
+} from "../../../../../shared/types/Screen";
+import type { Game } from "../../../../../app/modules/games/service/types";
 
 const visitTheBlacksmith: Screen = {
   _id: "visitTheBlacksmith",
@@ -29,7 +32,7 @@ const whatsForSale_blacksmith: Screen = {
     5 gold.`,
     `There's a set of armor that looks like it's never been worn, the price is 15 gold.`,
     `There's a shield that looks like it's been through a lot and the strap is broken, the price is 2 gold.`,
-    `You have %%{User.coins} gold.`,
+    `You have %%{User.gold} gold.`,
   ],
   choiceInformation: {
     text: "What do you do?",
@@ -80,11 +83,10 @@ const buyTheShield: Screen = {
         type: "save",
         optionText: "Buy it",
         screenId: "buyItOutRight_shield",
-        saveValues: [{ savePath: "User.coins", saveValue: "-2" }], // TODO: Once inventory is added, add shield to the inventory
+        saveValues: [{ savePath: "User.gold", saveValue: "-2" }], // TODO: Once inventory is added, add shield to the inventory
       },
-      (): ChoiceOption => {
-        const user = LoadService.loadUser();
-        if (user.stats.charm < 2) {
+      (game: Game): EvaluatedChoiceOption => {
+        if (game.character.stats.charm < 2) {
           return {
             type: "save",
             optionText: "Try to haggle",
@@ -122,7 +124,7 @@ const haggleSuccess_shield: Screen = {
         type: "save",
         optionText: "Buy it",
         screenId: "buyItOutRight_shield",
-        saveValues: [{ savePath: "User.coins", saveValue: "-1" }], // TODO: add shield to inventory
+        saveValues: [{ savePath: "User.gold", saveValue: "-1" }], // TODO: add shield to inventory
       },
     ],
   },
@@ -166,7 +168,7 @@ const haggleFail_shield: Screen = {
         type: "save",
         optionText: "Buy it",
         screenId: "buyItOutRight_shield",
-        saveValues: [{ savePath: "User.coins", saveValue: "-2" }], // TODO: add shield to inventory
+        saveValues: [{ savePath: "User.gold", saveValue: "-2" }], // TODO: add shield to inventory
       },
     ],
   },
@@ -194,18 +196,17 @@ const buyTheArmor: Screen = {
         type: "save",
         optionText: "Buy it",
         screenId: "buyItOutRight",
-        saveValues: [{ savePath: "User.coins", saveValue: "-15" }], // TODO: Once inventory is added, add armor to the inventory
+        saveValues: [{ savePath: "User.gold", saveValue: "-15" }], // TODO: Once inventory is added, add armor to the inventory
       },
-      (): ChoiceOption => {
-        const user = LoadService.loadUser();
-        if (user.stats.charm < 3) {
+      (game: Game): EvaluatedChoiceOption => {
+        if (game.character.stats.charm < 3) {
           return {
             type: "save",
             optionText: "Try to haggle",
             screenId: "haggleFail_armor",
             saveValues: [{ savePath: "User.stats.charm", saveValue: "++" }],
           };
-        } else if (user.stats.charm < 4) {
+        } else if (game.character.stats.charm < 4) {
           return {
             type: "save",
             optionText: "Try to haggle",
@@ -243,7 +244,7 @@ const haggleSuccess_armor: Screen = {
         type: "save",
         optionText: "Buy it",
         screenId: "buyItOutRight_armor",
-        saveValues: [{ savePath: "User.coins", saveValue: "-12" }], // TODO: add armor to inventory
+        saveValues: [{ savePath: "User.gold", saveValue: "-12" }], // TODO: add armor to inventory
       },
     ],
   },
@@ -271,7 +272,7 @@ const paymentPlan_armor: Screen = {
         type: "save",
         optionText: "That works it",
         screenId: "paymentPlanAccepted_armor",
-        saveValues: [{ savePath: "User.coins", saveValue: "-5" }], // Add payment plan to your quests?
+        saveValues: [{ savePath: "User.gold", saveValue: "-5" }], // Add payment plan to your quests?
       },
     ],
   },
@@ -315,7 +316,7 @@ const haggleFail_armor: Screen = {
         type: "save",
         optionText: "Buy it",
         screenId: "buyItOutRight_armor",
-        saveValues: [{ savePath: "User.coins", saveValue: "-15" }], // TODO: add armor to inventory
+        saveValues: [{ savePath: "User.gold", saveValue: "-15" }], // TODO: add armor to inventory
       },
     ],
   },
@@ -363,11 +364,10 @@ const buyTheSword: Screen = {
         type: "save",
         optionText: "Buy it out right",
         screenId: "buyItOutRight_sword",
-        saveValues: [{ savePath: "User.coins", saveValue: "-5" }], // TODO: Once inventory is added, add sword to the inventory
+        saveValues: [{ savePath: "User.gold", saveValue: "-5" }], // TODO: Once inventory is added, add sword to the inventory
       },
-      (): ChoiceOption => {
-        const user = LoadService.loadUser();
-        if (user.stats.charm < 3) {
+      (game: Game): EvaluatedChoiceOption => {
+        if (game.character.stats.charm < 3) {
           return {
             type: "save",
             optionText: "Try to haggle",
@@ -405,7 +405,7 @@ const haggleSuccess_sword: Screen = {
         type: "save",
         optionText: "Buy it",
         screenId: "buyItOutRight_sword",
-        saveValues: [{ savePath: "User.coins", saveValue: "-4" }], // TODO: add sword to inventory
+        saveValues: [{ savePath: "User.gold", saveValue: "-4" }], // TODO: add sword to inventory
       },
     ],
   },
@@ -430,7 +430,7 @@ const haggleFail_sword: Screen = {
         type: "save",
         optionText: "Buy it",
         screenId: "buyItOutRight_sword",
-        saveValues: [{ savePath: "User.coins", saveValue: "-5" }], // TODO: add sword to inventory
+        saveValues: [{ savePath: "User.gold", saveValue: "-5" }], // TODO: add sword to inventory
       },
     ],
   },

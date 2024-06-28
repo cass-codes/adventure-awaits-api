@@ -1,8 +1,9 @@
+import { Game } from "../../../../app/modules/games/service/types";
 import { EvaluatedChoiceOption, Screen } from "../../../../shared/types/Screen";
 import { evalStats } from "./_shared";
 
-function evalStatsForKael(): EvaluatedChoiceOption[] {
-  const options = evalStats();
+function evalStatsForKael(game: Game): EvaluatedChoiceOption[] {
+  const options = evalStats(game);
   const newOptions: EvaluatedChoiceOption[] = [];
   options.forEach((option) => {
     const newOption: EvaluatedChoiceOption = {

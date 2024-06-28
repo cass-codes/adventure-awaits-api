@@ -1,7 +1,8 @@
-import { ChoiceOption, Screen } from "../../../shared/types/Screen";
-import { Tavern } from "../../../shared/types/Character";
-import { QuestStatus } from "../../../shared/types/Quest";
-import { LoadService } from "../../../server/LoadService";
+import type {
+  EvaluatedChoiceOption,
+  Screen,
+} from "../../../shared/types/Screen";
+import type { Game } from "../../../app/modules/games/service/types";
 
 // TODO: check all of these screens to make sure they have the right header.
 // TODO: finish the evalWhichTavern fn and the respective screens
@@ -21,18 +22,18 @@ const endFirstDay: Screen = {
       {
         type: "screen",
         optionText: "Continue to Day 1 (in development)",
-        screenId: (): string => {
-          const user = LoadService.loadUser();
-          switch (user.tavern) {
-            case Tavern.TheRustySword:
-              return wakeUp_RustySword._id;
-            case Tavern.TheSilverSpoon:
-              return wakeUp_SilverSpoon._id; // TODO
-            case Tavern.SewerWater:
-              return "Sewer Water"; //TODO
-            default:
-              throw new Error("Invalid tavern");
-          }
+        screenId: (_game: Game): string => {
+          return wakeUp_RustySword._id;
+          // switch (game.tavern) { // TODO Add in tavern as a possibility on the Game Object
+          // case Tavern.TheRustySword:
+          //   return wakeUp_RustySword._id;
+          // case Tavern.TheSilverSpoon:
+          //   return wakeUp_SilverSpoon._id; // TODO
+          // case Tavern.SewerWater:
+          //   return "Sewer Water"; //TODO
+          // default:
+          //   throw new Error("Invalid tavern");
+          // }
         },
       },
     ],
@@ -93,10 +94,9 @@ const wakeUp_SilverSpoon: Screen = {
   },
 };
 
-function evalStartFirstDay() {
-  const user = LoadService.loadUser();
-  const quests = user.quests;
-  const options = [
+function evalStartFirstDay(game: Game): EvaluatedChoiceOption[] {
+  const quests = game.quests;
+  const options: EvaluatedChoiceOption[] = [
     {
       type: "screen",
       optionText: "Explore the marketplace",
@@ -104,13 +104,14 @@ function evalStartFirstDay() {
     },
   ];
   Object.values(quests).forEach((quest) => {
-    if (quest.status === QuestStatus.active) {
-      options.push({
-        type: "screen",
-        optionText: quest.displayText,
-        screenId: quest.screenId,
-      });
-    }
+    // TODO Add "Quest" to the Game object with a proper type
+    // if (quest.status === QuestStatus.active) {
+    //   options.push({
+    //     type: "screen",
+    //     optionText: quest.displayText,
+    //     screenId: quest.screenId,
+    //   });
+    // }
   });
   return options;
 }
@@ -134,37 +135,37 @@ const sitAndChat: Screen = {
   main: [
     `You sit at the bar and chat with the barkeep. He tells you about the latest news and gossip
     in the city.`,
-    (): string => {
-      const user = LoadService.loadUser();
-      return user.quests.learnAboutRobberies.status === QuestStatus.notFound
-        ? `You learn that the city has had some recent economic troubles and many believe that they
-      are due to a series of robberies that have targeted the city's wealthiest citizens.`
-        : "";
+    (game: Game): string => {
+      // TODO Update once the quests stuff has been fixed
+      // return game.quests.learnAboutRobberies.status === QuestStatus.notFound ?
+      return `You learn that the city has had some recent economic troubles and many believe that they
+      are due to a series of robberies that have targeted the city's wealthiest citizens.`;
+      // : "";
     },
     "You eat a hearty breakfast and drink a cup of coffee. You feel ready to take on the day.",
   ],
   choiceInformation: {
     text: "",
     options: [
-      (): ChoiceOption => {
-        const user = LoadService.loadUser();
-        return user.quests.learnAboutRobberies.status === QuestStatus.notFound
-          ? {
-              type: "save",
-              optionText: "Head out",
-              screenId: headOut._id,
-              saveValues: [
-                {
-                  savePath: "User.quests",
-                  saveValue: "learnAboutRobberies",
-                },
-              ],
-            }
-          : {
-              type: "screen",
-              optionText: "Head out",
-              screenId: headOut._id,
-            };
+      (_game: Game) => {
+        // TODO Update once the quests stuff has been fixed
+        // return game.quests.learnAboutRobberies.status === QuestStatus.notFound ?
+        return {
+          type: "save",
+          optionText: "Head out",
+          screenId: headOut._id,
+          saveValues: [
+            {
+              savePath: "User.quests",
+              saveValue: "learnAboutRobberies",
+            },
+          ],
+        };
+        // : {
+        //     type: "screen",
+        //     optionText: "Head out",
+        //     screenId: headOut._id,
+        //   };
       },
     ],
   },

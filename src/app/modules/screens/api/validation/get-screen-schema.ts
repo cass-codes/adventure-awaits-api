@@ -4,6 +4,7 @@ import { Request } from "express";
 interface GetScreenSchema {
   query: {
     gameId: string;
+    userId: string;
   };
   params: {
     screenId: string;
@@ -20,8 +21,8 @@ export const getScreenSchema: JSONSchemaType<GetScreenSchema> = {
     query: {
       type: "object",
       additionalProperties: false,
-      required: ["gameId"],
-      properties: { gameId: { type: "string" } },
+      required: ["gameId", "userId"],
+      properties: { gameId: { type: "string" }, userId: { type: "string" } },
     },
     params: {
       type: "object",
