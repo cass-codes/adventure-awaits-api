@@ -13,7 +13,7 @@ export class GameRepository {
     const res = await GameModel.create<GameDocument>({
       ...newGame,
       _id: new Types.ObjectId(),
-      // createdAt: new Date(), // Tbd if i'll do this
+      // createdAt: new Date(), // TODO: Do this
     });
     return convertDBObjectToGame(res);
   }

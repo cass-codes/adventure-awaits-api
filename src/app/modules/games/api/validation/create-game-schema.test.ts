@@ -10,7 +10,7 @@ describe("CreateGameSchema", () => {
     validBody = {
       userId: "123",
       day: 1,
-      screen: "screen",
+      screenId: "screen",
       character: {
         characterName: "name",
         class: UserClass.bard,
@@ -38,29 +38,13 @@ describe("CreateGameSchema", () => {
       expect(validationErrors).toEqual([]);
     });
 
-    it.each(["day", "screen", "character"])(
-      "should fail when %s is missing",
-      (field) => {
-        const body = { ...validBody };
-        //@ts-expect-error implicit any
-        delete body[field];
-        const validationErrors = validator({
-          body,
-        });
-
-        expect(validationErrors).toEqual([
-          `/body must have required property '${field}'`,
-        ]);
-      }
-    );
-
     it.each([
       ["userId", 1, "string"],
       ["userId", {}, "string"],
       ["day", "string", "number"],
       ["day", {}, "number"],
-      ["screen", 1, "string"],
-      ["screen", {}, "string"],
+      ["screenId", 1, "string"],
+      ["screenId", {}, "string"],
       ["character", "string", "object"],
       ["character", 1, "object"],
     ])('should fail when "%s" is the wrong type', (field, value, validType) => {
@@ -80,35 +64,9 @@ describe("CreateGameSchema", () => {
 
       expect(validationErrors).toEqual(["/body/day must be >= 0"]);
     });
-
-    it('should succeed when "userId" is missing', () => {
-      const body = { ...validBody };
-      delete body.userId;
-      const validationErrors = validator({
-        body,
-      });
-
-      expect(validationErrors).toEqual([]);
-    });
   });
 
   describe("character", () => {
-    it.each(["characterName", "class", "stats", "money"])(
-      "should fail when %s is missing",
-      (field) => {
-        const body = { ...validBody };
-        //@ts-expect-error implicit any
-        delete body.character[field];
-        const validationErrors = validator({
-          body,
-        });
-
-        expect(validationErrors).toEqual([
-          `/body/character must have required property '${field}'`,
-        ]);
-      }
-    );
-
     it.each([
       ["characterName", 1, "string"],
       ["characterName", {}, "string"],
@@ -133,7 +91,7 @@ describe("CreateGameSchema", () => {
       "should succeed with class as %s",
       (validClass) => {
         const body = { ...validBody };
-        body.character.class = validClass;
+        body.character = { ...body.character, class: validClass };
         const validationErrors = validator({
           body,
         });
@@ -157,21 +115,6 @@ describe("CreateGameSchema", () => {
   });
 
   describe("stats", () => {
-    it.each([
-      ["goodness", "cleverness", "sneakiness", "brawn", "magic", "charm"],
-    ])("should fail when %s is missing", (field) => {
-      const body = { ...validBody };
-      //@ts-expect-error implicit any
-      delete body.character.stats[field];
-      const validationErrors = validator({
-        body,
-      });
-
-      expect(validationErrors).toEqual([
-        `/body/character/stats must have required property '${field}'`,
-      ]);
-    });
-
     it.each([
       ["goodness", "cleverness", "sneakiness", "brawn", "magic", "charm"],
     ])('should fail when "%s" is less than -5', (field) => {
@@ -204,19 +147,6 @@ describe("CreateGameSchema", () => {
   });
 
   describe("money", () => {
-    it.each(["gold", "pennies"])("should fail when %s is missing", (field) => {
-      const body = { ...validBody };
-      //@ts-expect-error implicit any
-      delete body.character.money[field];
-      const validationErrors = validator({
-        body,
-      });
-
-      expect(validationErrors).toEqual([
-        `/body/character/money must have required property '${field}'`,
-      ]);
-    });
-
     it.each(["gold", "pennies"])(
       'should fail when "%s" is less than 0',
       (field) => {

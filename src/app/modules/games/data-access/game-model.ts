@@ -3,6 +3,7 @@ import { UserClass } from "../../../../shared/types/Character";
 import { GameDocument } from "../service/types";
 
 const statsSchema = {
+  default: 0,
   type: Number,
   $gte: -5,
   $lte: 5,
@@ -11,11 +12,9 @@ const statsSchema = {
 const CharacterSchema = {
   name: {
     type: String,
-    required: true,
   },
   class: {
     type: String,
-    required: true,
     enum: UserClass,
   },
   stats: {
@@ -29,7 +28,7 @@ const CharacterSchema = {
   money: {
     gold: {
       type: Number,
-      default: 0,
+      default: 10,
     },
     pennies: {
       type: Number,

@@ -5,7 +5,7 @@ import { getScreenSchema } from "./validation";
 
 const screenRouter = Router();
 
-screenRouter.get(
+screenRouter.put(
   "/:screenId",
   validationFactory(getScreenSchema),
   getScreenById
