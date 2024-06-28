@@ -2,7 +2,7 @@
 module.exports = {
   preset: "ts-jest",
   testEnvironment: "node",
-  testMatch: ["**/src/**/*.test.ts"], // Adjust the pattern to match your test file locations
+  testMatch: ["**/src/**/*.test.ts"],
   moduleFileExtensions: ["ts", "js"],
   transform: {
     "^.+\\.ts$": ["ts-jest", { tsconfig: "tsconfig.json" }],
@@ -12,4 +12,5 @@ module.exports = {
   moduleNameMapper: {
     "src/(.*)": "<rootDir>/src/$1",
   },
+  testPathIgnorePatterns: ["\\.data\\.test\\.ts$"], // Ignore files ending in .data.test.ts
 };

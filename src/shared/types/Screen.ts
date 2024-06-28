@@ -7,6 +7,13 @@ export interface Screen {
   choiceInformation: ChoiceInfo;
 }
 
+export interface EvaluatedScreen {
+  _id: string;
+  header: string;
+  main: EvaluatedMainContentProps;
+  choiceInformation: ChoiceInfo;
+}
+
 // Main
 
 export interface PictureMain {
@@ -16,15 +23,32 @@ export interface PictureMain {
   sideText: string[];
 }
 
+export function isPictureMain(main: string | PictureMain): main is PictureMain {
+  return (main as PictureMain).url !== undefined;
+}
+
 export type MainContentProps = (string | PictureMain | ScreenFunction)[];
 
 export type EvaluatedMainContentProps = (string | PictureMain)[];
+
+export function isEvaluatedMainContentProps(
+  main: MainContentProps
+): main is EvaluatedMainContentProps {
+  return (main as EvaluatedMainContentProps).every(
+    (line) => typeof line === "string" || isPictureMain(line)
+  );
+}
 
 // Choices
 
 export interface ChoiceInfo {
   text: string;
   options: ChoiceOption[] | ScreenFunction;
+}
+
+export interface EvaluatedChoiceInfo {
+  text: string;
+  options: EvaluatedChoiceOption[];
 }
 
 interface BaseChoiceOption {
@@ -58,6 +82,15 @@ export type EvaluatedChoiceOption =
   | SaveChoiceOption
   | InputChoiceOption
   | QuitChoiceOption;
+
+export function isEvaluatedChoiceOption(
+  option: ChoiceOption
+): option is EvaluatedChoiceOption {
+  return (
+    (option as EvaluatedChoiceOption).optionText !== undefined &&
+    typeof option !== "function"
+  );
+}
 
 export type ChoiceOption = EvaluatedChoiceOption | ScreenFunction;
 
