@@ -6,7 +6,22 @@ export function convertDBObjectToGame(game: GameDocument): Game {
     userId: game.userId,
     screenId: game.screenId,
     day: game.day,
-    character: game.character,
+    character: {
+      name: game.character.name,
+      class: game.character.class,
+      stats: {
+        goodness: game.character.stats.goodness,
+        sneakiness: game.character.stats.sneakiness,
+        cleverness: game.character.stats.cleverness,
+        brawn: game.character.stats.brawn,
+        magic: game.character.stats.magic,
+        charm: game.character.stats.charm,
+      },
+      money: {
+        gold: game.character.money.gold,
+        pennies: game.character.money.pennies,
+      },
+    },
     quests: game.quests ?? [],
   };
 }
