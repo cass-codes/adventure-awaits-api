@@ -50,11 +50,9 @@ export class GameService {
   ): Promise<Game> {
     const game: Game = await this.getGame(gameId, userId);
     let gameToUpdate = { ...game };
-    console.log("gameToUpdate", gameToUpdate.character);
     for (const { saveValue, savePath } of saveValues) {
       gameToUpdate = this.saveContent(game, saveValue, savePath);
     }
-    console.log("gameAfterUpdate", gameToUpdate.character);
     return this.updateGame(gameId, gameToUpdate);
   }
 
