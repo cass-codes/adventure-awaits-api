@@ -36,3 +36,8 @@ export interface UpdateGame {
     relationships?: object;
   };
 }
+
+export interface SaveValues {
+  savePath: string;
+  saveValue: string;
+}
