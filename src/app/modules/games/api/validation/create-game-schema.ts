@@ -3,22 +3,22 @@ import { UserClass } from "../../../../../shared/types/Character";
 
 export interface CreateGameDto {
   userId?: string;
-  day: number;
-  screen: string;
-  character: {
-    characterName: string;
-    class: UserClass;
-    stats: {
-      goodness: number;
-      cleverness: number;
-      sneakiness: number;
-      brawn: number;
-      magic: number;
-      charm: number;
+  day?: number;
+  screenId?: string;
+  character?: {
+    characterName?: string;
+    class?: UserClass;
+    stats?: {
+      goodness?: number;
+      cleverness?: number;
+      sneakiness?: number;
+      brawn?: number;
+      magic?: number;
+      charm?: number;
     };
-    money: {
-      gold: number;
-      pennies: number;
+    money?: {
+      gold?: number;
+      pennies?: number;
     };
   };
 }
@@ -37,75 +37,74 @@ export const createGameSchema: JSONSchemaType<GameSchema> = {
       additionalProperties: false,
       properties: {
         userId: { type: "string", nullable: true }, // will be hooked up at some point but at the moment can just be blank
-        day: { type: "number", minimum: 0 },
-        screen: { type: "string" },
+        day: { type: "number", minimum: 0, nullable: true },
+        screenId: { type: "string", nullable: true },
         character: {
           type: "object",
+          nullable: true,
           additionalProperties: false,
           properties: {
-            characterName: { type: "string" },
+            characterName: { type: "string", nullable: true },
             class: {
+              nullable: true,
               type: "string",
               enum: Object.values(UserClass),
             },
             stats: {
+              nullable: true,
               type: "object",
               additionalProperties: false,
               properties: {
                 goodness: {
+                  nullable: true,
                   type: "number",
                   minimum: -5,
                   maximum: 5,
                 },
                 cleverness: {
+                  nullable: true,
                   type: "number",
                   minimum: -5,
                   maximum: 5,
                 },
                 sneakiness: {
+                  nullable: true,
                   type: "number",
                   minimum: -5,
                   maximum: 5,
                 },
                 brawn: {
+                  nullable: true,
                   type: "number",
                   minimum: -5,
                   maximum: 5,
                 },
                 magic: {
+                  nullable: true,
                   type: "number",
                   minimum: -5,
                   maximum: 5,
                 },
                 charm: {
+                  nullable: true,
                   type: "number",
                   minimum: -5,
                   maximum: 5,
                 },
               },
-              required: [
-                "goodness",
-                "cleverness",
-                "sneakiness",
-                "brawn",
-                "magic",
-                "charm",
-              ],
             },
             money: {
+              nullable: true,
               type: "object",
               additionalProperties: false,
               properties: {
-                gold: { type: "number", minimum: 0 },
-                pennies: { type: "number", minimum: 0 },
+                gold: { type: "number", minimum: 0, nullable: true },
+                pennies: { type: "number", minimum: 0, nullable: true },
               },
-              required: ["gold", "pennies"],
             },
           },
-          required: ["characterName", "class", "stats", "money"],
         },
       },
-      required: ["day", "screen", "character"],
     },
   },
 };
