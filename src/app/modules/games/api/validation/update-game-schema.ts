@@ -1,4 +1,5 @@
 import { JSONSchemaType } from "ajv";
+import { TavernEnum } from "../../../../../shared/types/Character";
 
 export interface UpdateGameDto {
   day?: number;
@@ -23,6 +24,7 @@ export interface UpdateGameDto {
       };
     };
   };
+  tavern?: TavernEnum;
 }
 
 interface GameSchema {
@@ -123,6 +125,11 @@ export const updateGameSchema: JSONSchemaType<GameSchema> = {
               },
             },
           },
+        },
+        tavern: {
+          type: "string",
+          nullable: true,
+          enum: Object.values(TavernEnum),
         },
       },
     },

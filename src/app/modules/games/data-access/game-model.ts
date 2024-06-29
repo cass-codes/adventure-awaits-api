@@ -1,5 +1,5 @@
 import { Model, Schema, Types, model } from "mongoose";
-import { UserClass } from "../../../../shared/types/Character";
+import { TavernEnum, UserClass } from "../../../../shared/types/Character";
 import { GameDocument } from "../service/types";
 
 const statsSchema = {
@@ -76,6 +76,10 @@ const GameSchema = new Schema({
       type: Object,
     },
     default: [],
+  },
+  tavern: {
+    type: String,
+    enum: TavernEnum,
   },
 });
 

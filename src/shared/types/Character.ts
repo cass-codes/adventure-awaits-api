@@ -1,15 +1,15 @@
 import { Relationship } from "./Relationship";
 
-export enum Tavern {
+export enum TavernEnum {
   TheRustySword = "The Rusty Sword",
   TheSilverSpoon = "The Silver Spoon",
   SewerWater = "Sewer Water",
 }
 
 export enum UserClass {
-  bard = "Bard",
-  fighter = "Fighter",
-  mage = "Mage",
+  Bard = "Bard",
+  Fighter = "Fighter",
+  Mage = "Mage",
 }
 
 export enum Motivations {

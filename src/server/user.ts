@@ -5,7 +5,7 @@ import {
   Motivations,
   RelationshipEnum,
   Stat,
-  Tavern,
+  TavernEnum,
   UserClass,
 } from "../shared/types/Character";
 import { evalPlusMinusInput } from "./helper";
@@ -17,7 +17,7 @@ class Character implements Character {
   motivations: Motivations[] = [];
   name = "";
   userClass?: UserClass;
-  tavern?: Tavern;
+  tavern?: TavernEnum;
   money = { gold: 10, pennies: 0 };
   stats = {
     goodness: 0,
@@ -75,7 +75,7 @@ export function setCoins(value: string) {
 }
 
 export function setTavern(tavern: string) {
-  user.tavern = tavern as Tavern;
+  user.tavern = tavern as TavernEnum;
 }
 
 export function updateStat(value: string, _stat: string) {

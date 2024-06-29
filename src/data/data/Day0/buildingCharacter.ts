@@ -67,7 +67,7 @@ const bardBegin: Screen = {
         type: "save",
         optionText: "Next",
         screenId: "theAdventureBegins",
-        saveValues: [{ savePath: "User.class", saveValue: "bard" }],
+        saveValues: [{ savePath: "User.class", saveValue: "Bard" }],
       },
     ],
   },
@@ -100,7 +100,7 @@ const fighterBegin: Screen = {
         saveValues: [
           {
             savePath: "User.class",
-            saveValue: "fighter",
+            saveValue: "Fighter",
           },
         ],
       },
@@ -137,7 +137,7 @@ const mageBegin: Screen = {
         saveValues: [
           {
             savePath: "User.class",
-            saveValue: "mage",
+            saveValue: "Mage",
           },
         ],
       },

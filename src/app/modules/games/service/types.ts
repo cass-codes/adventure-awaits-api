@@ -1,5 +1,5 @@
 import { Types } from "mongoose";
-import { Character } from "../../../../shared/types/Character";
+import { Character, TavernEnum } from "../../../../shared/types/Character";
 
 export interface GameCreationProps {
   quests: unknown[];
@@ -7,6 +7,7 @@ export interface GameCreationProps {
   day: number;
   screenId: string;
   character: Character;
+  tavern?: TavernEnum;
 }
 
 export interface Game extends GameCreationProps {
