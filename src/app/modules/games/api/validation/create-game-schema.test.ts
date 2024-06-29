@@ -13,7 +13,7 @@ describe("CreateGameSchema", () => {
       screenId: "screen",
       character: {
         characterName: "name",
-        class: UserClass.bard,
+        class: UserClass.Bard,
         stats: {
           goodness: 1,
           cleverness: 1,

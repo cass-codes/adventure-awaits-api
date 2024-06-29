@@ -4,7 +4,6 @@ import { Quest, QuestStatus } from "../shared/types/Quest";
 import {
   Motivations,
   RelationshipEnum,
-  Stat,
   TavernEnum,
   UserClass,
 } from "../shared/types/Character";
