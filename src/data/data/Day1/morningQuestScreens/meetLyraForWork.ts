@@ -72,4 +72,6 @@ const meetLyraForWork: Screen = {
   },
 };
 
-export const screens = [meetLyraForWork];
+export const screens: Record<string, Screen> = {
+  [meetLyraForWork._id]: meetLyraForWork,
+};

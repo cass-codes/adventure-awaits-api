@@ -103,4 +103,7 @@ const rejectHunstanAndDulgotForJob: Screen = {
   },
 };
 
-export const screens = [meetHunstanForAnswers, rejectHunstanAndDulgotForJob];
+export const screens: Record<string, Screen> = {
+  [meetHunstanForAnswers._id]: meetHunstanForAnswers,
+  [rejectHunstanAndDulgotForJob._id]: rejectHunstanAndDulgotForJob,
+};

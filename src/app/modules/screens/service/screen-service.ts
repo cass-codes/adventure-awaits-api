@@ -19,7 +19,7 @@ import { RelationshipEnum, Stat } from "../../../../shared/types/Character";
 
 export class ScreenService {
   static getScreenById(id: string): Screen {
-    const screen = screens.find((screen) => screen._id === id);
+    const screen = screens[id];
     if (!screen) {
       throw new Error(`Screen with id: ${id} not found`);
     }

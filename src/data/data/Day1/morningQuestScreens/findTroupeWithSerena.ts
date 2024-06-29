@@ -42,4 +42,6 @@ const findTroupeWithSerena: Screen = {
   },
 };
 
-export const screens = [findTroupeWithSerena];
+export const screens: Record<string, Screen> = {
+  [findTroupeWithSerena._id]: findTroupeWithSerena,
+};

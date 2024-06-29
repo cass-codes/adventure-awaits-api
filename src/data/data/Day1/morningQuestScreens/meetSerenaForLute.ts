@@ -37,4 +37,6 @@ const meetSerenaForLute: Screen = {
   },
 };
 
-export const screens = [meetSerenaForLute];
+export const screens: Record<string, Screen> = {
+  [meetSerenaForLute._id]: meetSerenaForLute,
+};

@@ -11,7 +11,7 @@ export async function getScreenById(req: GetScreenDTO, res: Response) {
   try {
     const screenId = req.params.screenId;
     const { gameId, userId } = req.query;
-    const screen = ScreenService.getScreenById(screenId);
+    const screen = await ScreenService.getScreenById(screenId);
     const { saveValues } = req.body;
     if (saveValues) {
       await gameService.saveScreenValues(gameId, userId, saveValues);

@@ -145,10 +145,10 @@ const mageBegin: Screen = {
   },
 };
 
-export const buildingCharacterScreens: Screen[] = [
-  start,
-  pickClass,
-  bardBegin,
-  fighterBegin,
-  mageBegin,
-];
+export const buildingCharacterScreens: Record<string, Screen> = {
+  [start._id]: start,
+  [pickClass._id]: pickClass,
+  [bardBegin._id]: bardBegin,
+  [fighterBegin._id]: fighterBegin,
+  [mageBegin._id]: mageBegin,
+};

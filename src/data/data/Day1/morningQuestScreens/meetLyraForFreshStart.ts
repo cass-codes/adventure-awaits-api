@@ -81,4 +81,6 @@ const meetLyraForFreshStart: Screen = {
   },
 };
 
-export const screens = [meetLyraForFreshStart];
+export const screens: Record<string, Screen> = {
+  [meetLyraForFreshStart._id]: meetLyraForFreshStart,
+};

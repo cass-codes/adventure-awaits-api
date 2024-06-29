@@ -183,9 +183,9 @@ const trainBeforeTournament: Screen = {
   },
 };
 
-export const screens = [
-  meetKaelForAdventure,
-  noTournament,
-  joinTournament,
-  trainBeforeTournament,
-];
+export const screens: Record<string, Screen> = {
+  [meetKaelForAdventure._id]: meetKaelForAdventure,
+  [noTournament._id]: noTournament,
+  [joinTournament._id]: joinTournament,
+  [trainBeforeTournament._id]: trainBeforeTournament,
+};

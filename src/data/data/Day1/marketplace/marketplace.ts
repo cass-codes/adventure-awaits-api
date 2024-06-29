@@ -50,4 +50,7 @@ day1Marketplace_again._id = "day1Marketplace_again";
 day1Marketplace_again.main[0] = `You return to the marketplace.`;
 day1Marketplace_again.main[1] = `Vendors call out to you as you pass, each of them promising something better than the last.`;
 
-export const screens = [day1Marketplace, day1Marketplace_again];
+export const screens: Record<string, Screen> = {
+  [day1Marketplace._id]: day1Marketplace,
+  [day1Marketplace_again._id]: day1Marketplace_again,
+};

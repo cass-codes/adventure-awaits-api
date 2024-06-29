@@ -1,3 +1,4 @@
+import { Screen } from "../../../../shared/types/Screen";
 import { screens as meetHunstanForAdventureScreens } from "./meetHunstanForAdventure";
 import { screens as meetHunstanForAnswersScreens } from "./meetHunstanForAnswers";
 import { screens as meetHunstanForDisappearScreens } from "./meetHunstanForDisappear";
@@ -10,7 +11,7 @@ import { screens as workWithSomerildScreens } from "./workWithSomerild";
 import { screens as meetSerenaForLuteScreens } from "./meetSerenaForLute";
 import { screens as findTroupeWithSerenaScreens } from "./findTroupeWithSerena";
 
-export const screens = [
+export const screens: Record<string, Screen> = {
   ...meetHunstanForAdventureScreens,
   ...meetHunstanForAnswersScreens,
   ...meetHunstanForDisappearScreens,
@@ -22,4 +23,4 @@ export const screens = [
   ...workWithSomerildScreens,
   ...meetSerenaForLuteScreens,
   ...findTroupeWithSerenaScreens,
-];
+};

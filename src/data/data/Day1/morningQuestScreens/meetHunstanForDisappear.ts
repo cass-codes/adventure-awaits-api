@@ -121,4 +121,7 @@ const moreInformationOnDisappearing: Screen = {
   },
 };
 
-export const screens = [meetHunstanForDisappear, moreInformationOnDisappearing];
+export const screens: Record<string, Screen> = {
+  [meetHunstanForDisappear._id]: meetHunstanForDisappear,
+  [moreInformationOnDisappearing._id]: moreInformationOnDisappearing,
+};
