@@ -50,4 +50,6 @@ const meetLyraForAdventure: Screen = {
   },
 };
 
-export const screens = [meetLyraForAdventure];
+export const screens: Record<string, Screen> = {
+  [meetLyraForAdventure._id]: meetLyraForAdventure,
+};

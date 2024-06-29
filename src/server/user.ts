@@ -4,8 +4,7 @@ import { Quest, QuestStatus } from "../shared/types/Quest";
 import {
   Motivations,
   RelationshipEnum,
-  Stat,
-  Tavern,
+  TavernEnum,
   UserClass,
 } from "../shared/types/Character";
 import { evalPlusMinusInput } from "./helper";
@@ -17,7 +16,7 @@ class Character implements Character {
   motivations: Motivations[] = [];
   name = "";
   userClass?: UserClass;
-  tavern?: Tavern;
+  tavern?: TavernEnum;
   money = { gold: 10, pennies: 0 };
   stats = {
     goodness: 0,
@@ -44,45 +43,7 @@ class Character implements Character {
   }
 }
 
-let user = new Character();
-
-export function getUser(): Character {
-  return user;
-}
-
-export function setUser(newUser: Character) {
-  user = new Character(newUser);
-}
-
-export function setName(name: string) {
-  user.name = name;
-}
-
-export function setClass(userClass: string) {
-  user.userClass = userClass as UserClass;
-}
-
-export function setCoins(value: string) {
-  const changeVal = evalPlusMinusInput(value);
-  const changeGold = changeVal % 1;
-  const changePennies = changeVal - changeGold;
-  user.money.gold += changeGold;
-  user.money.pennies += changePennies;
-  while (user.money.gold < 0) {
-    user.money.gold += 1;
-    user.money.pennies -= 20;
-  }
-}
-
-export function setTavern(tavern: string) {
-  user.tavern = tavern as Tavern;
-}
-
-export function updateStat(value: string, _stat: string) {
-  const stat = Stat[_stat as Stat];
-  const currentStat = user.stats[stat];
-  user.stats[stat] = currentStat + evalPlusMinusInput(value);
-}
+const user = new Character();
 
 export function updateMotivations(value: string) {
   const motives = user.motivations || [];

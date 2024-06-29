@@ -171,10 +171,10 @@ const sitAndChat: Screen = {
   },
 };
 
-export const startingMorningScreens = [
-  wakeUp_RustySword,
-  wakeUp_SilverSpoon,
-  sitAndChat,
-  headOut,
-  endFirstDay,
-];
+export const startingMorningScreens: Record<string, Screen> = {
+  [wakeUp_RustySword._id]: wakeUp_RustySword,
+  [wakeUp_SilverSpoon._id]: wakeUp_SilverSpoon,
+  [sitAndChat._id]: sitAndChat,
+  [headOut._id]: headOut,
+  [endFirstDay._id]: endFirstDay,
+};

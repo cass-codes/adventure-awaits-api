@@ -45,4 +45,6 @@ const workWithSomerild: Screen = {
   },
 };
 
-export const screens = [workWithSomerild];
+export const screens: Record<string, Screen> = {
+  [workWithSomerild._id]: workWithSomerild,
+};

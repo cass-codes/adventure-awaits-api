@@ -9,7 +9,7 @@ export const testGame: Game = {
   screenId: "0",
   character: {
     name: "Adventurer",
-    class: UserClass.bard,
+    class: UserClass.Bard,
     stats: {
       goodness: 5,
       sneakiness: 0,

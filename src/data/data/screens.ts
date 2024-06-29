@@ -41,10 +41,10 @@ export const errorScreen: Screen = {
   },
 };
 
-export const screens: Screen[] = [
-  startScreen,
-  quit,
-  errorScreen,
+export const screens: Record<string, Screen> = {
+  [startScreen._id]: startScreen,
+  [quit._id]: quit,
+  [errorScreen._id]: errorScreen,
   ...day0Screens,
   ...day1Screens,
-];
+};

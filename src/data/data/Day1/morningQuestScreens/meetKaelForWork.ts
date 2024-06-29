@@ -46,4 +46,6 @@ const meetKaelForWork: Screen = {
   },
 };
 
-export const screens = [meetKaelForWork];
+export const screens: Record<string, Screen> = {
+  [meetKaelForWork._id]: meetKaelForWork,
+};

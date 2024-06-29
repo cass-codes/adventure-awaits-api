@@ -54,4 +54,7 @@ const exploreTheShops: Screen = {
   },
 };
 
-export const screens = [exploreTheShops, ...blacksmithScreens];
+export const screens: Record<string, Screen> = {
+  [exploreTheShops._id]: exploreTheShops,
+  ...blacksmithScreens,
+};

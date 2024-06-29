@@ -2,6 +2,7 @@ import { evalPlusMinusInput, parseSavePath } from "../../../../server/helper";
 import {
   RelationshipEnum,
   Stat,
+  TavernEnum,
   UserClass,
 } from "../../../../shared/types/Character";
 import { GameRepository } from "../data-access/game-repository";
@@ -86,8 +87,8 @@ export class GameService {
         // updateQuest(game, input, propertyPath[1], propertyPath[2] || undefined);
         // } else if (propertyPath[0] === "skills") {
         //   updateSkills(game, input);
-        // } else if (propertyPath[0] === "tavern") {
-        //   setTavern(game, input);
+      } else if (propertyPath[0] === "tavern") {
+        gameToReturn.tavern = input as TavernEnum;
       } else {
         throw Error(`Property not found: ${propertyPath[0]}`);
       }
