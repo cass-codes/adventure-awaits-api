@@ -12,7 +12,7 @@ export enum UserClass {
   Mage = "Mage",
 }
 
-export enum Motivations {
+export enum MotivationEnum {
   money = "money",
   power = "power",
   knowledge = "knowledge",
@@ -55,7 +55,7 @@ export interface Character {
     gold: number;
     pennies: number;
   };
-  // motivations?: Motivations[];
+  motivations?: MotivationEnum[];
   relationships?: {
     Lyra?: Relationship;
     Hunstan?: Relationship;

@@ -1,5 +1,6 @@
 import { evalPlusMinusInput, parseSavePath } from "../../../../server/helper";
 import {
+  MotivationEnum,
   RelationshipEnum,
   Stat,
   TavernEnum,
@@ -78,10 +79,17 @@ export class GameService {
         const currentPennies = game.character.money.pennies;
         gameToReturn.character.money.pennies =
           currentPennies + evalPlusMinusInput(input);
-        // } else if (propertyPath[0] === "motivations") {
-        //   updateMotivations(game, input);
+      } else if (propertyPath[0] === "motivations") {
+        gameToReturn.character.motivations = this.updateMotivations(
+          gameToReturn,
+          input
+        );
       } else if (propertyPath[0] === "relationships") {
-        this.updateRelationship(gameToReturn, input, propertyPath[1]);
+        gameToReturn.character.relationships = this.updateRelationship(
+          gameToReturn,
+          input,
+          propertyPath[1]
+        );
       } else if (propertyPath[0] === "quests") {
         // TODO Handle quests
         // updateQuest(game, input, propertyPath[1], propertyPath[2] || undefined);
@@ -98,16 +106,26 @@ export class GameService {
     return gameToReturn;
   }
 
+  private updateMotivations(game: Game, motivation: string) {
+    const motives = game.character.motivations || [];
+    const motive = motivation as MotivationEnum;
+    motives.push(MotivationEnum[motive]);
+    return motives;
+  }
+
   private updateRelationship(game: Game, value: string, _relationship: string) {
-    const relationship = RelationshipEnum[_relationship as RelationshipEnum];
-    if (!game.character.relationships) {
-      game.character.relationships = {};
+    const relationshipToUpdate =
+      RelationshipEnum[_relationship as RelationshipEnum];
+    let relationships = game.character.relationships;
+    if (!relationships) {
+      relationships = {};
     }
-    let rel = game.character.relationships[relationship];
-    if (rel === undefined) {
-      rel = { dayMet: game.day, relationshipValue: 0 };
+    let currentRelationship = relationships[relationshipToUpdate];
+    if (!currentRelationship) {
+      currentRelationship = { dayMet: game.day, relationshipValue: 0 };
     }
-    rel.relationshipValue += evalPlusMinusInput(value);
-    game.character.relationships[relationship] = rel;
+    currentRelationship.relationshipValue += evalPlusMinusInput(value);
+    relationships[relationshipToUpdate] = currentRelationship;
+    return relationships;
   }
 }

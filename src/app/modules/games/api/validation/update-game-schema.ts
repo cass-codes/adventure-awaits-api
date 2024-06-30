@@ -1,5 +1,8 @@
 import { JSONSchemaType } from "ajv";
-import { TavernEnum } from "../../../../../shared/types/Character";
+import {
+  MotivationEnum,
+  TavernEnum,
+} from "../../../../../shared/types/Character";
 
 export interface UpdateGameDto {
   day?: number;
@@ -23,6 +26,7 @@ export interface UpdateGameDto {
         relationshipValue: number;
       };
     };
+    motivations?: MotivationEnum[];
   };
   tavern?: TavernEnum;
 }
@@ -122,6 +126,14 @@ export const updateGameSchema: JSONSchemaType<GameSchema> = {
                   relationshipValue: { type: "number" },
                 },
                 required: ["dayMet", "relationshipValue"],
+              },
+            },
+            motivations: {
+              type: "array",
+              nullable: true,
+              items: {
+                type: "string",
+                enum: Object.values(MotivationEnum),
               },
             },
           },
