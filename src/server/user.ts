@@ -2,7 +2,7 @@ import { cloneDeep } from "lodash";
 import { dayZeroQuests } from "../data/data/Day0";
 import { Quest, QuestStatus } from "../shared/types/Quest";
 import {
-  Motivations,
+  MotivationEnum,
   RelationshipEnum,
   TavernEnum,
   UserClass,
@@ -13,7 +13,7 @@ import { Relationship } from "../shared/types/Relationship";
 class Character implements Character {
   _id: string = "";
   quests: { [key: string]: Quest } = {};
-  motivations: Motivations[] = [];
+  motivations: MotivationEnum[] = [];
   name = "";
   userClass?: UserClass;
   tavern?: TavernEnum;
@@ -47,8 +47,8 @@ const user = new Character();
 
 export function updateMotivations(value: string) {
   const motives = user.motivations || [];
-  const motive = value as Motivations;
-  motives.push(Motivations[motive]);
+  const motive = value as MotivationEnum;
+  motives.push(MotivationEnum[motive]);
   user.motivations = motives;
 }
 

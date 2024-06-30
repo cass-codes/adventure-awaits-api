@@ -50,6 +50,13 @@ const CharacterSchema = {
     },
     default: [],
   },
+  motivations: {
+    type: Array,
+    items: {
+      type: String,
+    },
+    default: [],
+  },
 };
 
 const GameSchema = new Schema({

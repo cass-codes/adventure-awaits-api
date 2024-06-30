@@ -21,6 +21,8 @@ export function convertDBObjectToGame(game: GameDocument): Game {
         gold: game.character.money.gold,
         pennies: game.character.money.pennies,
       },
+      relationships: game.character.relationships,
+      motivations: game.character.motivations,
     },
     quests: game.quests ?? [],
   };

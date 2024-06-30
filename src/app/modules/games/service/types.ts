@@ -35,6 +35,7 @@ export interface UpdateGame {
       pennies?: number;
     };
     relationships?: object;
+    motivations?: string[];
   };
 }
 
