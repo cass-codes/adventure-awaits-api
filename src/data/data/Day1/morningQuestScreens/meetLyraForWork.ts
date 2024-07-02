@@ -5,6 +5,7 @@ import {
 } from "../../../../shared/types/Screen";
 import { evalStats } from "./_shared";
 import { Game } from "../../../../app/modules/games/service/types";
+import { RelationshipEnum } from "../../../../shared/types/Character";
 
 function evalStatsForLyraAndHunstan(game: Game): EvaluatedChoiceOption[] {
   const options = evalStats(game);
@@ -44,8 +45,10 @@ const meetLyraForWork: Screen = {
     `You look at the man next to her and shake his hand. He grunts at you and
     Lyra laughs.`,
     (game: Game): PictureMain => {
-      return game.character.relationships?.Hunstan &&
-        game.character.relationships.Hunstan.relationshipValue > 0
+      const hunstanRelationship = game.character.relationships?.find((rel) => {
+        rel.name === RelationshipEnum.Hunstan;
+      });
+      return hunstanRelationship && hunstanRelationship.relationshipValue > 0
         ? {
             url: "Hunstan.png",
             alt: "Hunstan",

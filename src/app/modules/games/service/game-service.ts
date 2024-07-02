@@ -6,6 +6,7 @@ import {
   TavernEnum,
   UserClass,
 } from "../../../../shared/types/Character";
+import { Relationship } from "../../../../shared/types/Relationship";
 import { GameRepository } from "../data-access/game-repository";
 import { Game, GameCreationProps, SaveValues, UpdateGame } from "./types";
 
@@ -113,19 +114,36 @@ export class GameService {
     return motives;
   }
 
-  private updateRelationship(game: Game, value: string, _relationship: string) {
+  private updateRelationship(
+    game: Game,
+    value: string,
+    _relationship: string
+  ): Relationship[] {
     const relationshipToUpdate =
       RelationshipEnum[_relationship as RelationshipEnum];
-    let relationships = game.character.relationships;
-    if (!relationships) {
-      relationships = {};
-    }
-    let currentRelationship = relationships[relationshipToUpdate];
+    const relationships = game.character.relationships || [];
+    const currentRelationship = relationships.find(
+      (rel) => rel.name === relationshipToUpdate
+    );
     if (!currentRelationship) {
-      currentRelationship = { dayMet: game.day, relationshipValue: 0 };
+      const relationship = {
+        name: relationshipToUpdate,
+        dayMet: game.day,
+        relationshipValue: 0,
+      };
+      relationships.push(relationship);
     }
-    currentRelationship.relationshipValue += evalPlusMinusInput(value);
-    relationships[relationshipToUpdate] = currentRelationship;
-    return relationships;
+    const updatedRelationships = relationships.map((rel) => {
+      if (rel.name === relationshipToUpdate) {
+        return {
+          name: rel.name,
+          dayMet: rel.dayMet,
+          relationshipValue: rel.relationshipValue + evalPlusMinusInput(value),
+        };
+      }
+      return rel;
+    });
+    console.log("updatedRelationships", updatedRelationships);
+    return updatedRelationships;
   }
 }

@@ -147,13 +147,18 @@ export class ScreenService {
         const relationship =
           RelationshipEnum[propertyPath[1] as keyof typeof RelationshipEnum];
         if (game.character.relationships) {
-          const rel = game.character.relationships[relationship];
+          const rel = game.character.relationships.find(
+            (_rel) => relationship === _rel.name
+          );
           if (rel) {
             if (propertyPath[2] === "dayMet") {
               return rel.dayMet;
             }
             if (propertyPath[2] === "relationshipValue") {
               return rel.relationshipValue;
+            }
+            if (propertyPath[2] === "name") {
+              return rel.name;
             }
           }
         }

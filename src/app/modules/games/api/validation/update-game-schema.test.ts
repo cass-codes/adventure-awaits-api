@@ -1,3 +1,4 @@
+import { RelationshipEnum } from "../../../../../shared/types/Character";
 import { createValidationFromSchema } from "../../../shared/middleware";
 import { UpdateGameDto, updateGameSchema } from "./update-game-schema";
 
@@ -22,12 +23,13 @@ describe("Update Game Schema", () => {
           gold: 1,
           pennies: 2,
         },
-        relationships: {
-          Lyra: {
+        relationships: [
+          {
+            name: RelationshipEnum.Lyra,
             dayMet: 1,
             relationshipValue: 1,
           },
-        },
+        ],
       },
     };
   });

@@ -1,5 +1,9 @@
 import { Model, Schema, Types, model } from "mongoose";
-import { TavernEnum, UserClass } from "../../../../shared/types/Character";
+import {
+  RelationshipEnum,
+  TavernEnum,
+  UserClass,
+} from "../../../../shared/types/Character";
 import { GameDocument } from "../service/types";
 
 const statsSchema = {
@@ -45,6 +49,7 @@ const CharacterSchema = {
   relationships: {
     type: Array,
     of: {
+      name: { type: String, enum: RelationshipEnum }, // the name of the person
       dayMet: Number, // the number of the day that the user met the person
       relationshipValue: Number, // how good of friends are they?
     },
