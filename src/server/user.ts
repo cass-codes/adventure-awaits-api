@@ -26,14 +26,7 @@ class Character implements Character {
     magic: 0,
     charm: 0,
   };
-  relationships: {
-    Lyra?: Relationship;
-    Hunstan?: Relationship;
-    Kael?: Relationship;
-    Somerild?: Relationship;
-    Serena?: Relationship;
-    Kiirion?: Relationship;
-  } = {};
+  relationships: Relationship[] = [];
   skills: string[] = [];
 
   constructor(user?: Character) {

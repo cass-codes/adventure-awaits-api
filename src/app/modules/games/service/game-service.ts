@@ -118,14 +118,20 @@ export class GameService {
       RelationshipEnum[_relationship as RelationshipEnum];
     let relationships = game.character.relationships;
     if (!relationships) {
-      relationships = {};
+      relationships = [];
     }
-    let currentRelationship = relationships[relationshipToUpdate];
+    let currentRelationship = relationships.find((rel) => {
+      rel.name === relationshipToUpdate;
+    });
     if (!currentRelationship) {
-      currentRelationship = { dayMet: game.day, relationshipValue: 0 };
+      currentRelationship = {
+        name: relationshipToUpdate,
+        dayMet: game.day,
+        relationshipValue: 0,
+      };
+      relationships.push(currentRelationship);
     }
     currentRelationship.relationshipValue += evalPlusMinusInput(value);
-    relationships[relationshipToUpdate] = currentRelationship;
     return relationships;
   }
 }

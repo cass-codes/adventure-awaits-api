@@ -1,5 +1,6 @@
 import { Types } from "mongoose";
 import { Character, TavernEnum } from "../../../../shared/types/Character";
+import { Relationship } from "../../../../shared/types/Relationship";
 
 export interface GameCreationProps {
   quests: unknown[];
@@ -34,7 +35,7 @@ export interface UpdateGame {
       gold?: number;
       pennies?: number;
     };
-    relationships?: object;
+    relationships?: Relationship[];
     motivations?: string[];
   };
 }

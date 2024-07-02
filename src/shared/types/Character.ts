@@ -56,14 +56,7 @@ export interface Character {
     pennies: number;
   };
   motivations?: MotivationEnum[];
-  relationships?: {
-    Lyra?: Relationship;
-    Hunstan?: Relationship;
-    Kael?: Relationship;
-    Somerild?: Relationship;
-    Serena?: Relationship;
-    Kiirion?: Relationship;
-  };
+  relationships?: Relationship[];
   // skills: string[];
   // tavern?: Tavern;
 }
