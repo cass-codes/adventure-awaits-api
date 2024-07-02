@@ -1,4 +1,7 @@
-import { UserClass } from "../../../../shared/types/Character";
+import {
+  RelationshipEnum,
+  UserClass,
+} from "../../../../shared/types/Character";
 import { Game } from "../../games/service/types";
 
 export const testGame: Game = {
@@ -22,11 +25,12 @@ export const testGame: Game = {
       gold: 100,
       pennies: 44,
     },
-    relationships: {
-      Lyra: {
+    relationships: [
+      {
+        name: RelationshipEnum.Lyra,
         dayMet: 0,
         relationshipValue: 1,
       },
-    },
+    ],
   },
 };
