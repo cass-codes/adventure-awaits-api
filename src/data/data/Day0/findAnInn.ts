@@ -1,8 +1,8 @@
+import type { Game } from "../../../app/modules/games/service/types";
 import type {
   EvaluatedChoiceOption,
   Screen,
-} from "../../../shared/types/Screen";
-import type { Game } from "../../../app/modules/games/service/types";
+} from "../../../app/modules/screens/service/types";
 
 const theAdventureBegins: Screen = {
   _id: "theAdventureBegins",

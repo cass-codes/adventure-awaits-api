@@ -1,4 +1,4 @@
-import { Screen } from "../../../../shared/types/Screen";
+import { Screen } from "../../../../app/modules/screens/service/types";
 import { screens as meetHunstanForAdventureScreens } from "./meetHunstanForAdventure";
 import { screens as meetHunstanForAnswersScreens } from "./meetHunstanForAnswers";
 import { screens as meetHunstanForDisappearScreens } from "./meetHunstanForDisappear";

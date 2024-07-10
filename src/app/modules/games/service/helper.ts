@@ -4,6 +4,7 @@ export function parseSavePath(savePath: string) {
   const propertyPath: string[] = pathParts.slice(1);
   return { ObjectName, propertyPath };
 }
+
 export function evalPlusMinusInput(input: string) {
   if (input === "++") {
     return 1;

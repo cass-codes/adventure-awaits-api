@@ -1,16 +1,13 @@
-import { ScreenFunction } from "../../app/modules/screens/service/types";
+import { Game } from "../../../games/service/types";
+import {
+  EvaluatedChoiceOption,
+  EvaluatedMainContentProps,
+} from "./EvaluatedScreen";
 
 export interface Screen {
   _id: string;
   header: string;
   main: MainContentProps | EvaluatedMainContentProps;
-  choiceInformation: ChoiceInfo;
-}
-
-export interface EvaluatedScreen {
-  _id: string;
-  header: string;
-  main: EvaluatedMainContentProps;
   choiceInformation: ChoiceInfo;
 }
 
@@ -29,26 +26,11 @@ export function isPictureMain(main: string | PictureMain): main is PictureMain {
 
 export type MainContentProps = (string | PictureMain | ScreenFunction)[];
 
-export type EvaluatedMainContentProps = (string | PictureMain)[];
-
-export function isEvaluatedMainContentProps(
-  main: MainContentProps
-): main is EvaluatedMainContentProps {
-  return (main as EvaluatedMainContentProps).every(
-    (line) => typeof line === "string" || isPictureMain(line)
-  );
-}
-
 // Choices
 
 export interface ChoiceInfo {
   text: string;
   options: ChoiceOption[] | ScreenFunction;
-}
-
-export interface EvaluatedChoiceInfo {
-  text: string;
-  options: EvaluatedChoiceOption[];
 }
 
 interface BaseChoiceOption {
@@ -77,21 +59,6 @@ export interface QuitChoiceOption extends BaseChoiceOption {
   type: "quit";
 }
 
-export type EvaluatedChoiceOption =
-  | ScreenChoiceOption
-  | SaveChoiceOption
-  | InputChoiceOption
-  | QuitChoiceOption;
-
-export function isEvaluatedChoiceOption(
-  option: ChoiceOption
-): option is EvaluatedChoiceOption {
-  return (
-    (option as EvaluatedChoiceOption).optionText !== undefined &&
-    typeof option !== "function"
-  );
-}
-
 export type ChoiceOption = EvaluatedChoiceOption | ScreenFunction;
 
 export type FunctionProperties =
@@ -100,3 +67,9 @@ export type FunctionProperties =
   | EvaluatedMainContentProps
   | string
   | PictureMain;
+
+export type ScreenFunction = (game: Game) => FunctionProperties;
+
+export function isScreenFunction(fn: unknown): fn is ScreenFunction {
+  return typeof fn === "function" && fn.length === 1;
+}

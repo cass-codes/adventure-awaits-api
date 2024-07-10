@@ -1,7 +1,7 @@
 import type {
   EvaluatedChoiceOption,
   Screen,
-} from "../../../../../shared/types/Screen";
+} from "../../../../../app/modules/screens/service/types";
 import type { Game } from "../../../../../app/modules/games/service/types";
 
 const visitTheBlacksmith: Screen = {
