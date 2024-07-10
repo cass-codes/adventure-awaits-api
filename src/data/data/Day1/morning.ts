@@ -1,8 +1,8 @@
+import type { Game } from "../../../app/modules/games/service/types";
 import type {
   EvaluatedChoiceOption,
   Screen,
-} from "../../../shared/types/Screen";
-import type { Game } from "../../../app/modules/games/service/types";
+} from "../../../app/modules/screens/service/types";
 
 // TODO: check all of these screens to make sure they have the right header.
 // TODO: finish the evalWhichTavern fn and the respective screens

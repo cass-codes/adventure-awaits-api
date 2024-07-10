@@ -1,5 +1,5 @@
-import { Game } from "../../../../app/modules/games/service/types";
-import { SaveChoiceOption } from "../../../../shared/types/Screen";
+import type { Game } from "../../../../app/modules/games/service/types";
+import type { SaveChoiceOption } from "../../../../app/modules/screens/service/types";
 
 export function evalStats(
   game: Game

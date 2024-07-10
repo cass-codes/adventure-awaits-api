@@ -1,4 +1,4 @@
-import { Screen } from "../../shared/types/Screen";
+import { Screen } from "../../app/modules/screens/service/types";
 import { day0Screens } from "./Day0";
 import { day1Screens } from "./Day1";
 

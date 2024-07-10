@@ -1,5 +1,8 @@
-import { Game } from "../../../../app/modules/games/service/types";
-import { EvaluatedChoiceOption, Screen } from "../../../../shared/types/Screen";
+import type { Game } from "../../../../app/modules/games/service/types";
+import type {
+  EvaluatedChoiceOption,
+  Screen,
+} from "../../../../app/modules/screens/service/types";
 import { evalStats } from "./_shared";
 
 function evalStatsForKael(game: Game): EvaluatedChoiceOption[] {

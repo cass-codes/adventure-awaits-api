@@ -1,4 +1,4 @@
-import { Screen } from "../../../../shared/types/Screen";
+import { Screen } from "../../../../app/modules/screens/service/types";
 
 const findATroupeToJoin: Screen = {
   _id: "findATroupeToJoin",

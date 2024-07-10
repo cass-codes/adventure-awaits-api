@@ -1,3 +1,3 @@
-import { Screen } from "../../../../../shared/types/Screen";
+import { Screen } from "../../../../../app/modules/screens/service/types";
 
-export const screens = [];
+export const screens: Screen[] = [];

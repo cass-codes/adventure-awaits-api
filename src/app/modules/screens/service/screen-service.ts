@@ -1,19 +1,20 @@
-import {
-  ChoiceOption,
-  EvaluatedChoiceOption,
-  EvaluatedMainContentProps,
-  EvaluatedScreen,
-  MainContentProps,
-  PictureMain,
-  Screen,
-  isEvaluatedChoiceOption,
-  isEvaluatedMainContentProps,
-  isPictureMain,
-} from "../../../../shared/types/Screen";
 import { screens } from "../../../../data/data/screens";
 import { GameService } from "../../games/service/game-service";
 import { GameRepository } from "../../games/data-access/game-repository";
-import { ScreenFunction, isScreenFunction } from "./types";
+import {
+  type ChoiceOption,
+  type EvaluatedChoiceOption,
+  type EvaluatedMainContentProps,
+  type EvaluatedScreen,
+  type MainContentProps,
+  type PictureMain,
+  type Screen,
+  type ScreenFunction,
+  isEvaluatedChoiceOption,
+  isEvaluatedMainContentProps,
+  isPictureMain,
+  isScreenFunction,
+} from "./types";
 import { Game } from "../../games/service/types";
 import { RelationshipEnum, Stat } from "../../../../shared/types/Character";
 

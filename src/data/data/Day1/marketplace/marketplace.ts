@@ -1,5 +1,5 @@
 import * as _ from "lodash";
-import { Screen } from "../../../../shared/types/Screen";
+import { Screen } from "../../../../app/modules/screens/service/types";
 
 const day1Marketplace: Screen = {
   _id: "day1Marketplace",

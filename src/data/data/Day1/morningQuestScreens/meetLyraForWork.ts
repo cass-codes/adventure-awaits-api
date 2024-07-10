@@ -1,11 +1,11 @@
-import {
+import { evalStats } from "./_shared";
+import type { Game } from "../../../../app/modules/games/service/types";
+import { RelationshipEnum } from "../../../../shared/types/Character";
+import type {
   EvaluatedChoiceOption,
   PictureMain,
   Screen,
-} from "../../../../shared/types/Screen";
-import { evalStats } from "./_shared";
-import { Game } from "../../../../app/modules/games/service/types";
-import { RelationshipEnum } from "../../../../shared/types/Character";
+} from "../../../../app/modules/screens/service/types";
 
 function evalStatsForLyraAndHunstan(game: Game): EvaluatedChoiceOption[] {
   const options = evalStats(game);
