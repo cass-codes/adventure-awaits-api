@@ -46,17 +46,12 @@ export class GameService {
     await this.gameRepository.deleteGame(gameToDelete._id);
   }
 
-  async saveScreenValues(
-    gameId: string,
-    userId: string,
-    saveValues: SaveValues[]
-  ): Promise<Game> {
-    const game: Game = await this.getGame(gameId, userId);
+  async saveScreenValues(game: Game, saveValues: SaveValues[]): Promise<Game> {
     let gameToUpdate = { ...game };
     for (const { saveValue, savePath } of saveValues) {
       gameToUpdate = this.saveContent(game, saveValue, savePath);
     }
-    return this.updateGame(gameId, gameToUpdate);
+    return this.updateGame(game._id, gameToUpdate);
   }
 
   private saveContent(game: Game, input: string, savePath: string): Game {

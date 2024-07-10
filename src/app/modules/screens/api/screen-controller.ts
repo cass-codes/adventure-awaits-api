@@ -11,17 +11,18 @@ export async function getScreenById(req: GetScreenDTO, res: Response) {
   try {
     const screenId = req.params.screenId;
     const { gameId, userId } = req.query;
+    let game = await gameService.getGame(gameId, userId);
     const screen = await ScreenService.getScreenById(screenId);
     const { saveValues } = req.body;
     if (saveValues) {
-      await gameService.saveScreenValues(gameId, userId, saveValues);
+      game = await gameService.saveScreenValues(game, saveValues);
     }
     const evaluatedScreen = await ScreenService.evaluateScreen(
       screen,
       gameId,
       userId
     );
-    res.json(evaluatedScreen);
+    res.json({ screen: evaluatedScreen, game });
   } catch (error) {
     res.status(404).send(error);
   }
