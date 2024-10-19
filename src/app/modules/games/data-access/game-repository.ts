@@ -13,7 +13,8 @@ export class GameRepository {
     const res = await GameModel.create<GameDocument>({
       ...newGame,
       _id: new Types.ObjectId(),
-      // createdAt: new Date(), // TODO: Do this
+      createdAt: new Date(),
+      updatedAt: new Date(),
     });
     return convertDBObjectToGame(res);
   }
@@ -21,7 +22,7 @@ export class GameRepository {
   async updateGame(gameId: string, game: UpdateGame): Promise<Game> {
     const updatedGame = await GameModel.findOneAndUpdate<GameDocument>(
       { _id: gameId },
-      { $set: game },
+      { $set: { ...game, updatedAt: new Date() } },
       { returnDocument: "after" }
     );
     if (!updatedGame) {

@@ -17,6 +17,8 @@ export interface Game extends GameCreationProps {
 
 export interface GameDocument extends GameCreationProps {
   _id: Types.ObjectId;
+  updatedAt: Date;
+  createdAt: Date;
 }
 
 export interface UpdateGame {
